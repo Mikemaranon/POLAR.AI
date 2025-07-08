@@ -1,19 +1,19 @@
 const checkbox = document.getElementById('theme-toggle-checkbox');
-const body = document.body;
+ const themeStyle = document.getElementById('theme-style');
 
 // Load prefference
 if (localStorage.getItem('theme') === 'dark') {
-    body.classList.add('dark');
+    themeStyle.setAttribute('href', "/static/CSS/themes/dark-theme.css");
     checkbox.checked = true;
 }
 
 // Theme toggle
 checkbox.addEventListener('change', function () {
     if (this.checked) {
-        body.classList.add('dark');
+        themeStyle.setAttribute('href', "/static/CSS/themes/dark-theme.css");
         localStorage.setItem('theme', 'dark');
     } else {
-        body.classList.remove('dark');
+        themeStyle.setAttribute('href', "/static/CSS/themes/bright-theme.css");
         localStorage.setItem('theme', 'light');
     }
 });

@@ -1,0 +1,5 @@
+web_server/__pycache__
+
+web_server/api_m/__pycache__
+web_server/data_m/__pycache__
+web_server/user_m/__pycache__

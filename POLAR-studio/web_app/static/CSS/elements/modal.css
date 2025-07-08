@@ -1,0 +1,167 @@
+.fade-background {
+    display: none;
+    position: fixed;
+    z-index: 1; /* modal's background */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0; /* invisible at first */
+    transition: opacity 0.3s ease-in-out; /* pocality transition */
+}
+
+/* when modal is up, background becomes more opaque */
+.fade-background.show {
+    display: block;
+    opacity: 1;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 4;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 1rem;
+
+    transform: translateY(100%); /* starts from the bottom */
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+    /* Not visible at first */
+    visibility: hidden;
+    opacity: 0;
+}
+
+.modal.show {
+    transform: translateY(0); /* travels to the final position */
+    visibility: visible; /* make it visible */
+    opacity: 1; /* fully visible */
+}
+
+/* Modal's content */
+.modal-content {
+    margin: 5% auto;
+    margin-top: 140px;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
+/* close button */
+.close {
+    font-size: 28px;
+    font-weight: bold;
+    position: relative;
+    cursor: pointer;
+}
+
+.full-button {
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+    width: 415px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-left: 13%;
+}
+
+/* Estilos del contenedor de los bots */
+.inner-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+/* Estilos de las tarjetas de los bots */
+.bot-card {
+    border-radius: 8px;
+    padding: 1rem;
+    width: 200px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bot-card:hover {
+    transform: scale(1.05);
+}
+
+.full-button:hover {
+    transform: scale(1.05);
+}
+
+
+.bot-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.bot-card p {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Estilos responsive */
+@media (max-width: 1200px) {
+    .modal-content {
+        max-width: 500px;
+    }
+
+    .bot-card {
+        width: 180px;
+    }
+
+    .full-button {
+        margin-left: 9%;
+        width: 375px;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 400px;
+    }
+
+    .bot-card {
+        width: 150px;
+    }
+
+    .full-button {
+        margin-left: 6%;
+        width: 316px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        max-width: 90%;
+    }
+
+    .bot-card {
+        width: 100%;
+    }
+
+    .full-button {
+        margin-left: 0;
+        width: 100%;
+    }
+}

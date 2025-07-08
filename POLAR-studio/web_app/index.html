@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <link rel="stylesheet" href="/static/CSS/index.css">
+    <link rel="stylesheet" href="/static/CSS/elements/header.css">
+    <link rel="stylesheet" href="/static/CSS/elements/toggle-theme.css">
+    <link rel="stylesheet" href="/static/CSS/elements/modal.css">
+    <link rel="stylesheet" href="/static/CSS/fonts/fonts.css">
+    <link id="theme-style" rel="stylesheet" href="/static/CSS/themes/theme.css">
+
+</head>
+<body>
+    <header>
+        <h1>Welcome</h1>
+        <label class="theme-toggle">
+            <input type="checkbox" id="theme-toggle-checkbox">
+            <span class="slider"></span>
+        </label>
+        <button onclick="loadPage('/sites/user-config')">⚙️</button>
+    </header>
+
+    <main>
+        <div>
+            <h1 id="title">POLAR.AI</h1><span id="cursor">_</span>
+        </div>
+        <div class="container">
+            <div onclick="openModal()">
+            <!-- <div onclick="window.location.href='/sites/polarai'"> -->
+                <p>POLAR.AI Chat</p>
+            </div>
+            <div onclick="loadPage('/sites/training')">
+                <p>Training playground</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- background & modal -->
+    <div id="fadeBackground" class="fade-background"></div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Select a model</h2>
+            <div id="create-model" class="full-button">
+                import model
+            </div>
+            <div id="bots-container" class="inner-content">
+                <!-- dynamically generated bot list -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 DeepSeek-R1  |  open-source project on <a href="https://github.com/Mikemaranon?tab=repositories">GitHub</a></p>
+    </footer>
+
+    <script src="/static/JS/elements/dynamic-title.js"></script>
+    <script src="/static/JS/elements/toggle-theme.js"></script>
+    <script src="/static/JS/elements/modal.js"></script>
+    <script src="/static/JS/SERVER_CONN/token-handler.js"></script>
+    <script>
+        write_text(200);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,207 @@
+
+:root {
+    /* 🎨 Escala de grises */
+    --gray-100: #f9f9f9;
+    --gray-200: #f1f1f1;
+    --gray-300: #e4e4e4;
+    --gray-400: #d0d0d0;
+    --gray-500: #ccc;
+    --gray-600: #aaa;
+    --gray-700: #686868;
+    --gray-800: #444444;
+    --gray-900: #333333;
+
+    /* 🌞 index.html */
+    --bg-color: var(--gray-200);
+    --header-bg-color: #ffffff;
+    --text-color: var(--gray-900);
+    --button-bg-color: var(--gray-300);
+    --button-hover-bg-color: var(--gray-400);
+    --border-color: var(--gray-500);
+    --container-bg-color: var(--gray-300);
+    --url-color: var(--gray-700);
+    --url-color-hover: var(--gray-800);
+
+    /* 💬 polaria-chat.html */
+    --chat-box-color: var(--gray-400);
+    --chat-input-color: var(--gray-500);
+    --user-msg: #e3f2fd;  /* se mantiene único */
+    --bot-msg: transparent;
+
+    /* 💬 chat elements */
+    --items-bg-color: var(--gray-100);
+    --items-hover: var(--gray-400);
+    --button-hover: var(--gray-200);
+
+    /* 🪟 modal elements */
+    --modal-color: var(--gray-600);
+    --modal-border: var(--gray-500);
+    --modal-cont-bg: var(--gray-100);
+    --modal-bg-color: #ffffff;
+
+    --scrollbar-thumb: #4d4d4d;
+    --scrollbar-track: transparent;
+
+    --text-color-strong: #000;
+    --hover-overlay: rgba(0, 0, 0, 0.05);
+}
+
+/* dark theme */
+body.dark {
+    /* 🌑 Escala de grises invertida */
+    --gray-100: #121212;
+    --gray-200: #1e1e1e;
+    --gray-300: #2a2a2a;
+    --gray-400: #444444;
+    --gray-500: #666666;
+    --gray-600: #888888;
+    --gray-700: #aaaaaa;
+    --gray-800: #d0d0d0;
+    --gray-900: #f1f1f1;
+
+    /* 🌚 index.html */
+    --bg-color: var(--gray-200);
+    --header-bg-color: #1a1a1a;
+    --text-color: var(--gray-900);
+    --button-bg-color: var(--gray-300);
+    --button-hover-bg-color: var(--gray-400);
+    --border-color: var(--gray-500);
+    --container-bg-color: var(--gray-300);
+    --url-color: var(--gray-700);
+    --url-color-hover: var(--gray-800);
+
+    /* 💬 polaria-chat.html */
+    --chat-box-color: var(--gray-400);
+    --chat-input-color: var(--gray-500);
+    --user-msg: #2a3b4c;  /* versión oscura del celeste claro */
+    --bot-msg: transparent;
+
+    /* 💬 chat elements */
+    --items-bg-color: var(--gray-100);
+    --items-hover: var(--gray-400);
+    --button-hover: var(--gray-200);
+
+    /* 🪟 modal elements */
+    --modal-color: var(--gray-600);
+    --modal-border: var(--gray-500);
+    --modal-cont-bg: var(--gray-100);
+    --modal-bg-color: #1a1a1a;
+
+    --scrollbar-thumb: #888; /* o algo que se vea bien sobre fondo oscuro */
+    --scrollbar-track: transparent;
+
+    --text-color-strong: #fff;
+    --hover-overlay: rgba(255, 255, 255, 0.05);
+}
+
+/* Estilos para index.html */
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+header {
+    background-color: var(--header-bg-color);
+}
+
+header button {
+    background: var(--button-bg-color);
+}
+
+header button:hover {
+    background-color: var(--button-hover-bg-color);
+}
+
+.container div {
+    border: 1px solid var(--border-color);
+    background-color: var(--container-bg-color);
+}
+
+a {
+    color: var(--url-color);
+}
+
+a:hover {
+    color: var(--url-color-hover);
+}
+
+/* Estilos para polaria-chat.html */
+
+.chat-box {
+    background-color: var(--chat-box-color);
+}
+
+.chat-container {
+    background-color: var(--bg-color);
+}
+
+.chat-history,
+#message-input {
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+.chat-input {
+    background-color: var(--chat-input-color);
+}
+
+.user-msg {
+    background-color: var(--user-msg);
+}
+
+.bot-msg {
+    background-color: var(--bot-msg);
+}
+
+#message-input {
+    background-color: var(--chat-input-color);
+}
+
+.left-menu, .right-menu {
+    background-color: var(--container-bg-color);
+}
+
+/* Menu elements */
+
+.chat-item, .add-chat {
+    background: var(--items-bg-color);
+}
+
+.options-menu {
+    background: white;
+    border: 1px solid #ccc;
+}
+
+.menu-button:hover,
+.menu-button.delete:hover {
+    background: var(--button-hover);
+}
+
+.opt-button:hover {
+    background: var(--hover-overlay);
+}
+
+.add-chat:hover, .chat-item:hover {
+    background: var(--items-hover);
+}
+
+/* Modal in index.html */
+
+.modal-content {
+    border: 1px solid var(--modal-border);
+    background-color: var(--modal-bg-color);
+}
+
+.close {
+    color: var(--modal-color);
+}
+
+.close:hover,
+.close:focus {
+    color: var(--text-color-strong);
+}
+
+.create-model, .bot-card {
+    border: 1px solid var(--modal-border);
+    background-color: var(--modal-cont-bg);
+}

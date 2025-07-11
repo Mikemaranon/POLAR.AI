@@ -1,3 +1,9 @@
+/*
+===================================
+            BACKGROUND
+===================================
+*/
+
 .fade-background {
     display: none;
     position: fixed;
@@ -17,7 +23,12 @@
     opacity: 1;
 }
 
-/* Modal */
+/*
+===================================
+               MODAL
+===================================
+*/
+
 .modal {
     display: none;
     position: fixed;
@@ -67,6 +78,12 @@
     cursor: pointer;
 }
 
+/*
+===================================
+          MODAL ELEMENTS
+===================================
+*/
+
 .full-button {
     border-radius: 8px;
     padding: 1rem;
@@ -99,6 +116,12 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/*
+===================================
+           TRANSITIONS
+===================================
+*/
+
 .bot-card:hover {
     transform: scale(1.05);
 }
@@ -119,6 +142,12 @@
     font-size: 1rem;
     color: #555;
 }
+
+/*
+===================================
+               MEDIA
+===================================
+*/
 
 /* Estilos responsive */
 @media (max-width: 1200px) {

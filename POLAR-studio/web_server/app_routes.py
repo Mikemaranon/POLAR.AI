@@ -14,10 +14,9 @@ class AppRoutes:
         self._register_routes()
     
     # ==================================================================================
-    #                     REGISTERING ROUTES AND APIs
+    #                           REGISTERING ROUTES
     #
     #            [_register_routes]     instance of every basic route 
-    #            [_register_APIs]       instance of every API
     # ================================================================================== 
 
     def _register_routes(self):
@@ -25,6 +24,15 @@ class AppRoutes:
         self.app.add_url_rule("/index", "index", self.get_index)
         self.app.add_url_rule("/login", "login", self.get_login, methods=["GET", "POST"])
         self.app.add_url_rule("/logout", "logout", self.get_logout, methods=["POST"])
+
+        # chat routes
+        self.app.add_url_rule("/chat", "chat", self.get_chat, methods=["POST"])
+
+        # train routes
+        self.app.add_url_rule("/train", "train", self.get_train, methods=["POST"])
+
+        # userconfig routes
+        self.app.add_url_rule("/userconf", "userconf", self.get_userconf, methods=["POST"])
 
     # ==================================================================================
     #                           BASIC ROUTINGS URLs
@@ -72,3 +80,23 @@ class AppRoutes:
         response.headers["Expires"] = "0"
         return response
     
+    # ==================================================================================
+    #                           SPECIFIC ROUTINGS URLs
+    #
+    #            [get_chat]             redirect to a chat connected to an API
+    #            [get_train]            redirect to a training playground interface
+    #                                    to tune an specific model
+    # ================================================================================== 
+
+    def get_chat(self):
+        user = self.user_manager.check_user(request)
+        if user:            
+            return 0
+            # Redirect to chat.html
+        return render_template("login.html")
+
+    def get_train(self):
+        return 0
+
+    def get_userconf(self):
+        return 0

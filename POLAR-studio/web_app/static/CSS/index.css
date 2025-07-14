@@ -81,6 +81,32 @@ main h1 {
     font-size: 1.2rem;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px); /* opcional, para un efecto más suave */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.polar-logo img {
+    width: 80vw;
+    max-width: 600px;
+    height: auto;
+    display: block;
+    margin: 0 auto 20px;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.polar-logo:hover img {
+    filter: brightness(1.1); /* leve brillo al hacer hover */
+    transition: filter 0.3s ease;
+}
+
 @media (max-width: 1200px) {
     .container div {
         width: 180px;

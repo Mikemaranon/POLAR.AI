@@ -24,11 +24,14 @@
     </header>
 
     <main>
+        <div class="polar-logo">
+            <img src="{{ url_for('static', filename='ASSETS/logo.png') }}" alt="POLAR logo" />
+        </div>
         <div>
-            <h1 id="title">POLAR.AI</h1><span id="cursor">_</span>
+            <h1 id="title">POLAR studio</h1><span id="cursor">_</span>
         </div>
         <div class="container">
-            <div onclick="openModal()">
+            <div onclick="openModal(fetchBots)">
             <!-- <div onclick="window.location.href='/sites/polarai'"> -->
                 <p>POLAR.AI Chat</p>
             </div>
@@ -55,12 +58,13 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 DeepSeek-R1  |  open-source project on <a href="https://github.com/Mikemaranon?tab=repositories">GitHub</a></p>
+        <p>&copy; 2025 POLAR.AI  |  open-source project on <a href="https://github.com/Mikemaranon?tab=repositories">GitHub</a></p>
     </footer>
 
     <script src="/static/JS/elements/dynamic-title.js"></script>
     <script src="/static/JS/elements/toggle-theme.js"></script>
     <script src="/static/JS/elements/modal.js"></script>
+    <script src="/static/JS/elements/modals/modal-bots.js"></script>
     <script src="/static/JS/SERVER_CONN/token-handler.js"></script>
     <script>
         write_text(200);

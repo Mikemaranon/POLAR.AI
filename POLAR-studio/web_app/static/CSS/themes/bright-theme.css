@@ -1,115 +1,128 @@
 /* Paleta de colores */
+
 :root {
-    /* index.html */
-    --bg-color: #f1f1f1;
-    --header-bg-color: #ffffff;
-    --text-color: #333333;
-    --button-bg-color: #e0e0e0;
-    --button-hover-bg-color: #d0d0d0;
-    --border-color: #ccc;
-    --container-bg-color: #e4e4e4;
-    --url-color: #686868;
-    --url-color-hover: #444444;
-
-    /* polaria-chat.html */
-    --chat-box-color: #dddddd;
-    --chat-input-color: #cccccc;
-    --user-msg: #e3f2fd;
-    --bot-msg: transparent;
-
-    /* chat elements */
-    --items-bg-color: #f4f4f4;
-    --items-hover: #ddd;
-    --button-hover: #f0f0f0;
-
-    /* modal elements */
-    --modal-color: #aaa;
-    --modal-border: #ccc;
-    --modal-cont-bg: #f9f9f9;
-    --modal-bg-color: #fff;
+    --gray-1: #ffffff;              
+    --gray-2: #f9f9f9;              
+    --gray-3: #f4f4f4;              
+    --gray-4: #f1f1f1;              
+    --gray-5: #f0f0f0;              
+    --gray-6: #e0e0e0;              
+    --gray-7: #e4e4e4;              
+    --gray-8: #e3f2fd;              
+    --gray-9: #dddddd;              
+    --gray-10: #d0d0d0;             
+    --gray-11: #cccccc;             
+    --gray-12: #ccc;                
+    --gray-13: #ddd;                
+    --gray-14: #aaa;                
+    --gray-15: #686868;             
+    --gray-16: #444444;             
+    --gray-17: #333333;             
+    --gray-18: black;         
 }
 
-/* Estilos para index.html */
+/* index.html */
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color: var(--gray-4);
+    color: var(--gray-17);
 }
 
 header {
-    background-color: var(--header-bg-color);
+    background-color: var(--gray-1);
 }
 
 header button {
-    background: var(--button-bg-color);
+    background: var(--gray-6);
 }
 
 header button:hover {
-    background-color: var(--button-hover-bg-color);
+    background-color: var(--gray-10);
 }
 
 .container div {
-    border: 1px solid var(--border-color);
-    background-color: var(--container-bg-color);
+    border: 1px solid var(--gray-12);
+    background-color: var(--gray-7);
 }
 
 a {
-    color: var(--url-color);
+    color: var(--gray-15);
 }
 
 a:hover {
-    color: var(--url-color-hover);
+    color: var(--gray-16);
+}
+
+/* Modal in index.html */
+
+.modal-content {
+    border: 1px solid var(--gray-12);
+    background-color: var(--gray-1);
+}
+
+.close {
+    color: var(--gray-14);
+}
+
+.close:hover,
+.close:focus {
+    color: var(--gray-18);
+}
+
+.create-model, .bot-card {
+    border: 1px solid var(--gray-12);
+    background-color: var(--gray-2);
 }
 
 /* Estilos para polaria-chat.html */
 
 .chat-box {
-    background-color: var(--chat-box-color);
+    background-color: var(--gray-9);
 }
 
 .chat-container {
-    background-color: var(--bg-color);
+    background-color: var(var(--gray-4));
 }
 
 .chat-history {
-    scrollbar-color: #4d4d4d transparent;
+    scrollbar-color: var(--gray-16) transparent;
 }
 
 .chat-input {
-    background-color: var(--chat-input-color);
+    background-color: var(--gray-11);
 }
 
 .user-msg {
-    background-color: var(--user-msg);
+    background-color: var(--gray-8);
 }
 
 .bot-msg {
-    background-color: var(--bot-msg);
+    background-color: var(--gray-18);
 }
 
 #message-input {
-    background-color: var(--chat-input-color);
-    scrollbar-color: #4d4d4d transparent;
+    background-color: var(--gray-11);
+    scrollbar-color: var(--gray-16) transparent;
 }
 
 .left-menu, .right-menu {
-    background-color: var(--container-bg-color);
+    background-color: var(--gray-7);
 }
 
 /* Menu elements */
 
 .chat-item, .add-chat {
-    background: var(--items-bg-color);
+    background: var(--gray-3);
 }
 
 .options-menu {
-    background: white;
-    border: 1px solid #ccc;
+    background: var(--gray-1);
+    border: 1px solid var(--gray-12);
 }
 
 .menu-button:hover,
 .menu-button.delete:hover {
-    background: var(--button-hover);
+    background: var(--gray-5);
 }
 
 .opt-button:hover {
@@ -117,26 +130,6 @@ a:hover {
 }
 
 .add-chat:hover, .chat-item:hover {
-    background: var(--items-hover);
+    background: var(--gray-13);
 }
 
-/* Modal in index.html */
-
-.modal-content {
-    border: 1px solid var(--modal-border);
-    background-color: var(--modal-bg-color);
-}
-
-.close {
-    color: var(--modal-color);
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-}
-
-.create-model, .bot-card {
-    border: 1px solid var(--modal-border);
-    background-color: var(--modal-cont-bg);
-}

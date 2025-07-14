@@ -1,31 +1,52 @@
 /* Paleta de colores */
 :root {
-    --bg-color: #333333;
-    --header-bg-color: #424242;
-    --text-color: #e0e0e0;
-    --button-bg-color: #797979;
-    --button-hover-bg-color: #a7a7a7;
-    --border-color: #555555;
-    --container-bg-color: #575757;
-    --url-color: #7b7b7b;
-    --url-color-hover: #a7a7a7;
+    --gray-1: #333333;
+    --gray-2: #424242;
+    --gray-3: #434343;
+    --gray-4: #474747;
+    --gray-5: #505050;
+    --gray-6: #555555;
+    --gray-7: #575757;
+    --gray-8: #616161;
+    --gray-9: #6c6c6c;
+    --gray-10: #6f6f6f;
+    --gray-11: #797979;
+    --gray-12: #7b7b7b;
+    --gray-13: #9c9c9c;
+    --gray-14: #a7a7a7;
+    --gray-15: #d2d2d2;
+    --gray-16: #e0e0e0;
+    --gray-17: #ffffff;
+    --gray-18: transparent;
+
+    --bg-color: var(--gray-1);
+    --header-bg-color: var(--gray-2);
+    --text-color: var(--gray-16);
+    --button-bg-color: var(--gray-11);
+    --button-hover-bg-color: var(--gray-14);
+    --border-color: var(--gray-6);
+    --container-bg-color: var(--gray-7);
+    --url-color: var(--gray-12);
+    --url-color-hover: var(--gray-14);
 
     /* polaria-chat.html */
-    --chat-box-color: #474747;
-    --chat-input-color: #616161;
-    --user-msg: #575757;
-    --bot-msg: transparent;
+    --chat-box-color: var(--gray-4);
+    --chat-input-color: var(--gray-8);
+    --user-msg: var(--gray-7);
+    --bot-msg: var(--gray-18);
 
     /* chat elements */
-    --items-bg-color: #6f6f6f;
-    --items-hover: #9c9c9c;
-    
+    --items-bg-color: var(--gray-10);
+    --items-hover: var(--gray-13);
+    --button-hover: var(--gray-5);
+
     /* modal elements */
-    --modal-color: #d2d2d2;
-    --modal-border: #505050;
-    --modal-cont-bg: #6c6c6c;
-    --modal-bg-color: #434343;
+    --modal-color: var(--gray-15);
+    --modal-border: var(--gray-5);
+    --modal-cont-bg: var(--gray-9);
+    --modal-bg-color: var(--gray-3);
 }
+
 
 body {
     background-color: var(--bg-color);

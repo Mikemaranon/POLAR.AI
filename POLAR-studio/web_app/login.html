@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="/static/CSS/login.css">
+    <link rel="stylesheet" href="/static/CSS/logo.css">
 
     <script src="/static/JS/SERVER_CONN/token-handler.js" defer></script>
     <script src="/static/JS/login.js" defer></script>
 </head>
 <body>
     <div class="container">
-        <h2>Login</h2>
+        <div class="polar-logo">
+            <img src="{{ url_for('static', filename='ASSETS/logo.png') }}" alt="POLAR logo" />
+        </div>
         <form id="login-form">
             <label for="username">Username:</label>
             <input type="text" name="username" id="username" required><br>

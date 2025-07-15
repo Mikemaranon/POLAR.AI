@@ -1,0 +1,28 @@
+{
+    "user": {
+        "module": "user_commands",
+        "sub_commands": {
+            "list": {
+                "description": "list all users",
+                "module": "user_commands",
+                "function": "list_users"
+            },
+            "add": {
+                "description": "Add a new user",
+                "module": "user_commands",
+                "function": "add_user",
+                "args": ["username", "password", "role"]
+            }
+        }
+    },
+    "status": {
+        "module": "system_commands",
+        "function": "status",
+        "description": "Show server status"
+    },
+    "help": {
+        "module": "system_commands",
+        "function": "help",
+        "description": "Show this help"
+    }
+}

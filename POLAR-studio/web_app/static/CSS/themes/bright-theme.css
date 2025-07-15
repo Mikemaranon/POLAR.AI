@@ -6,7 +6,7 @@
     --gray-3: #f4f4f4;              
     --gray-4: #f1f1f1;              
     --gray-5: #f0f0f0;              
-    --gray-6: #e0e0e0;              
+    --gray-6: #e4e4e4;              
     --gray-7: #e4e4e4;              
     --gray-8: #e3f2fd;              
     --gray-9: #dddddd;              
@@ -24,7 +24,7 @@
 /* index.html */
 
 body {
-    background-color: var(--gray-4);
+    background-color: var(--gray-5);
     color: var(--gray-17);
 }
 

@@ -1,5 +1,13 @@
+# Main server [node, core, forge, studio]
 flask
-werkzeug
 requests
+
+# Security : [node, studio]
+werkzeug
 PyJWT
+
+# Terminal : [node]
 click
+
+# PostreSQL : [node, forge]
+psycopg2-binary

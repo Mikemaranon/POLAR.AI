@@ -1,0 +1,21 @@
+# DATABASE/docker-compose.yml
+
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: polar_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: node_db
+      POSTGRES_USER: node_admin
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5400:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+volumes:
+  pgdata:

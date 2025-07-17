@@ -76,18 +76,10 @@ class UserManager:
         if self.authenticate(username, password):
             token = self.generate_token(username)
             
-            # --- CAMBIO AQUÍ ---
-            # 1. Obtener el user_id del usuario que se está logueando
             user_data = self.db.get_user(username)
             if user_data:
                 user_id = user_data["id"]
-                # 2. Guardar la sesión en la tabla 'sessions'
                 self.db.save_session(user_id, token)
-                
-                # Opcional: Si la clase User todavía tiene un propósito para envolver el token,
-                # podrías mantener esta línea, pero 'self.users' ya no se usará como caché de sesiones activas.
-                # user = User(token=token, username=username) 
-                # self.users[username] = user # ¡Eliminar o comentar esta línea!
                 
                 return token
         return None

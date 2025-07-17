@@ -19,7 +19,6 @@ CREATE TABLE sessions (
 );
 
 -- COMMANDS FOR POLAR NODE
-
 CREATE TABLE IF NOT EXISTS commands (
     id TEXT PRIMARY KEY,
     module TEXT NOT NULL,

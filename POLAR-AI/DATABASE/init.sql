@@ -12,9 +12,14 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE sessions (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users(id),
-  token TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    token TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS commands (
+    id TEXT PRIMARY KEY,
+    module TEXT NOT NULL,
+    sub_commands JSONB
+);

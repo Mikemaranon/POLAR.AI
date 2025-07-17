@@ -18,8 +18,67 @@ CREATE TABLE sessions (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- COMMANDS FOR POLAR NODE
+
 CREATE TABLE IF NOT EXISTS commands (
     id TEXT PRIMARY KEY,
     module TEXT NOT NULL,
+    function TEXT NULL,
     sub_commands JSONB
 );
+
+INSERT INTO commands (id, module, function, sub_commands)
+VALUES (
+    'user',
+    'user_commands',
+    NULL,
+    '{
+        "list": {
+            "description": "List all users",
+            "function": "list_users",
+            "args": ["role"]
+        },
+        "info": {
+            "description": "Prints selected user info",
+            "function": "print_info"
+            "args": ["name"]
+        },
+        "add": {
+            "description": "Add a new user",
+            "function": "add_user",
+            "args": ["name", "psswd", "role"]
+        },
+        "update": {
+            "description": "Updates a selected user",
+            "function": "update_user",
+            "args": ["name", "psswd", "role"]
+        },
+        "delete": {
+            "description": "Deletes a selected user",
+            "function": "delete_user"
+            "args": ["name"]
+        },
+        "block": {
+            "description": "Blocks acces to a selected user",
+            "function": "block_user"
+            "args": ["name", "time"]
+        }
+    }'::jsonb
+);
+
+INSERT INTO commands (id, module, function, sub_commands)
+VALUES (
+    'status',                   -- ID
+    'system_commands',          -- module
+    'system_status',            -- function
+    NULL
+);
+
+
+INSERT INTO commands (id, module, function, sub_commands)
+VALUES (
+    'help',                     -- ID
+    'system_commands',          -- module
+    'system_help'               -- function
+    NULL
+)

@@ -59,9 +59,13 @@ VALUES (
             "args": ["name"]
         },
         "block": {
-            "description": "Blocks acces to a selected user",
+            "description": "Blocks access to a selected user",
             "function": "block_user"
             "args": ["name", "time"]
+        },
+        "help": {
+            "description": "Prints all the info related to this command",
+            "function": "command_help"
         }
     }'::jsonb
 );

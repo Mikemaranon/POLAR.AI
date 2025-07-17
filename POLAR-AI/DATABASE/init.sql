@@ -1,7 +1,7 @@
 -- DATABASE/init.sql
 
 -- VARIABLES
-CREATE TYPE user_role AS ENUM ('admin', 'trainer', 'developer', 'user');
+CREATE TYPE user_role AS ENUM ('user', 'trainer', 'developer', 'admin');
 
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
@@ -17,3 +17,4 @@ CREATE TABLE sessions (
   token TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+

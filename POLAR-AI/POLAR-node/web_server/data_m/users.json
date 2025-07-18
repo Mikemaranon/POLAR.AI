@@ -1,8 +1,0 @@
-{
-    "admin": {
-        "password": "$2b$12$KIX/YZQZ8EoX3fF5JVoObeOjQ5m.Y2wbU7bQgV16Phv1MIV0RTvO6"
-    },
-    "mike": {
-        "password": "pbkdf2:sha256:260000$lKcbFbhqTuyfLF5E$3e1416eae9df6e30d39f9ce833ba98d367a0a514b37b3b593c72548cb3476080"
-    }
-}

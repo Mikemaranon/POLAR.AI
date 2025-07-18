@@ -2,6 +2,7 @@
 
 import os
 import json
+import psycopg2
 from data_m.db_connector import DBConnector
 
 #   ||==============================================================||
@@ -204,7 +205,7 @@ class Database:
     # ||  - delete_command()      DELETE            4               ||
     # ||============================================================||
 
-    def get_command(self, command_id: str) -> dict or None:
+    def get_command(self, command_id: str):
         query = "SELECT id, module, function, sub_commands FROM commands WHERE id = %s;"
         try:
             self.execute(query, (command_id,))
@@ -221,7 +222,7 @@ class Database:
             print(f"[SELECT ERROR] fetching command failed: {e}")
             return None
 
-    def save_new_command(conn, command_data: dict):
+    def save_new_command(self, conn, command_data: dict):
         query = "INSERT INTO commands (id, module, function, sub_commands) VALUES (%s, %s, %s, %s)"
         try:
             self.execute(query,

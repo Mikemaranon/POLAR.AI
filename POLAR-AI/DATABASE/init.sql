@@ -34,32 +34,50 @@ VALUES (
         "list": {
             "description": "List all users",
             "function": "list_users",
-            "args": ["role"]
+            "args": {
+                "r": "not-req"
+            }
         },
         "info": {
             "description": "Prints selected user info",
             "function": "print_info"
-            "args": ["name"]
+            "args": {
+                "n": "required",
+            }
         },
         "add": {
             "description": "Add a new user",
             "function": "add_user",
-            "args": ["name", "psswd", "role"]
+            "args": {
+                "n": "required",
+                "r": "required",
+                "p": "required"
+            }
         },
         "update": {
             "description": "Updates a selected user",
             "function": "update_user",
-            "args": ["name", "psswd", "role"]
+            "args": {
+                "username": "required",
+                "n": "required",
+                "r": "not-req",
+                "p": "required"
+            }
         },
         "delete": {
             "description": "Deletes a selected user",
             "function": "delete_user"
-            "args": ["name"]
+            "args": {
+                "username": "required"
+            }
         },
         "block": {
             "description": "Blocks access to a selected user",
             "function": "block_user"
-            "args": ["name", "time"]
+            "args": {
+                "username": "required", 
+                "t": "required"
+            }
         },
         "help": {
             "description": "Prints all the info related to this command",
@@ -73,14 +91,14 @@ VALUES (
     'status',                   -- ID
     'system_commands',          -- module
     'system_status',            -- function
-    NULL
+    '{
+        "long": {
+            "description": "Prints long system status",
+            "function": "system_status_long"
+        },
+        "short": {
+            "description": "Prints short system status",
+            "function": "system_status_short"
+        },
+    }'
 );
-
-
-INSERT INTO commands (id, module, function, sub_commands)
-VALUES (
-    'help',                     -- ID
-    'system_commands',          -- module
-    'system_help'               -- function
-    NULL
-)

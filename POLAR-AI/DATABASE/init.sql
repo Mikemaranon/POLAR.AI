@@ -4,7 +4,6 @@
 CREATE TYPE user_role AS ENUM ('user', 'trainer', 'developer', 'admin');
 
 CREATE TABLE IF NOT EXISTS users (
-    id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     password TEXT NOT NULL,
     role user_role NOT NULL,
@@ -13,7 +12,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE sessions (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id),
+    username INTEGER REFERENCES users(username),
     token TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

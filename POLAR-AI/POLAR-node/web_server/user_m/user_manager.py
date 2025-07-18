@@ -2,7 +2,6 @@ import jwt
 import datetime
 from werkzeug.security import check_password_hash
 from data_m.database import Database
-from user_m.user import User
 
 class UserManager:
     _instance = None
@@ -67,36 +66,26 @@ class UserManager:
     def login(self, username: str, password: str):
         if self.authenticate(username, password):
             token = self.generate_token(username)
-            user = User(token=token, username=username)
-            self.users[username] = user
+            # database: INSERT INTO sessions VALUES(username, token)
+            self.db.save_session(username=username, token=token)
             return token
         return None
 
-    def login(self, username: str, password: str):
-        if self.authenticate(username, password):
-            token = self.generate_token(username)
-            
-            user_data = self.db.get_user(username)
-            if user_data:
-                user_id = user_data["id"]
-                self.db.save_session(user_id, token)
-                
-                return token
-        return None
-
     def logout(self, token):
-        username = self._get_username_from_token(token)
-        if username and username in self.users:
-            del self.users[username]
-            return {'status': 'success'}, 200
+        # database: DELETE FROM sessions WHERE token = %s
+        query = self.db.delete_session(token)
+        if query:
+            return {'status': 'success'}, 200 # TODO: CHANGE THIS TO TRUE/FALSE, JSON TO API
         return {'status': 'not found'}, 404
 
     def get_user(self, token):
-        username = self._get_username_from_token(token)
-        if username:
-            user = self.users.get(username)
-            if user:
-                return user
+        # database: SELECT FROM sessions WHERE token = %s
+        session_query = self.db.get_session(token)
+        if session_query != None:
+            user = query["username"]
+            # database: SELECT FROM users WHERE username = %s
+            user_query = self.db.get_user(username)
+            return user_query
         return None
 
     # ========================================================

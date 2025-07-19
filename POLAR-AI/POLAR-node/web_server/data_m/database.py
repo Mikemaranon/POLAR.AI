@@ -3,49 +3,46 @@
 import os
 import json
 import psycopg2
+import threading
 from werkzeug.security import generate_password_hash
 from data_m.db_connector import DBConnector
 
-#   ||==============================================================||
-#   ||    MAIN CONFIGURATION OF NODE POSTGRE-SQL. DO NOT EDIT       ||
-#   ||    ORIGINAL VALUES BELOW                                     ||
-#   ||                                                              ||
-#   ||    - dbname: node_db                                         ||
-#   ||    - user: node_admin                                        ||
-#   ||    - password: admin123                                      ||
-#   ||    - host: localhost                                         ||
-#   ||    - port: 5400                                              ||  
-#   ||==============================================================||
+HOST = '0.0.0.0'
+PORT = 5555
+ENCODING = 'utf-8'
+BUFFER_SIZE = 1024
 
-DB_CONFIG = {
-    "dbname": "node_db",
-    "user": "node_admin",
-    "password": "admin123",
-    "host": "localhost",
-    "port": 5400
+ROLE_TO_LEVEL = {
+    'user': 1,
+    'trainer': 2,
+    'developer': 3,
+    'admin': 4
+}
+
+LEVEL_TO_ROLE = {
+    1: 'user',
+    2: 'trainer',
+    3: 'developer',
+    4: 'admin'
 }
 
 class Database:
 
-    ROLE_TO_LEVEL = {
-        'user': 1,
-        'trainer': 2,
-        'developer': 3,
-        'admin': 4
-    }
+    _instance = None
+    _lock = threading.Lock()
 
-    LEVEL_TO_ROLE = {
-        1: 'user',
-        2: 'trainer',
-        3: 'developer',
-        4: 'admin'
-    }
-    
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            with cls._lock:
+                if not cls._instance:
+                    cls._instance = super(Database, cls).__new__(cls)
+        return cls._instance
+
     def __init__(self):
+        # This runs every time Database() is called, but does not reinitialize if already initialized
         if hasattr(self, 'initialized') and self.initialized:
             return
 
-        # connect to the db_connector
         self.connector = DBConnector()
 
         try:
@@ -53,10 +50,10 @@ class Database:
             self.cursor = self.conn.cursor()
             self.initialized = True
         except Exception as e:
-            print(f"[ERROR] No se pudo conectar a la base de datos al iniciar Database: {e}")
+            print(f"[ERROR] Could not connect to the database when initializing Database: {e}")
             self.conn = None
             self.cursor = None
-            self.initialized = False # Indicar que la inicialización falló
+            self.initialized = False
 
     # =============================================
     #           BASIC DATABASE METHODS

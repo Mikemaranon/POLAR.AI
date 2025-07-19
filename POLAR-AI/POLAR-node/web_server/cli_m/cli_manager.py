@@ -1,7 +1,22 @@
+# web_server/cli_m/cli_manager.py
+
+import threading
 from data_m import get_command
 
 class CliManager:
+    _instance = None
+    _lock = threading.Lock()
+
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            with cls._lock:
+                if cls._instance is None:
+                    cls._instance = super(CliManager, cls).__new__(cls)
+        return cls._instance
+
     def __init__(self):
+        if hasattr(self, 'initiated') and self.initiated:
+            return
         self.initiated = True
 
     # ||================================================================================================||
@@ -15,7 +30,6 @@ class CliManager:
     # ||        [get_command_function]      get the function object for the subcommand                  ||
     # ||        [execute_command_function]  execute the resolved function with given arguments          ||
     # ||================================================================================================||
-
 
     def parse_command_input(self, command_str: str):
         parts = command_str.strip().split()
@@ -86,6 +100,10 @@ class CliManager:
         except Exception as e:
             return f"[CLI_MANAGER] Error running '{function_name}': {e}"
 
+
+    # ||======================================================================||
+    # ||                      CLI MANAGER MAIN METHOD                         ||
+    # ||======================================================================||
 
     def process_command(self, command_str: str, user_context: dict):
         # step 1: parse the command input

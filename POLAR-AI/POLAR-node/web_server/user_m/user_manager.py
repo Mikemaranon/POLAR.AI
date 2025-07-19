@@ -1,14 +1,20 @@
+# web_server/user_m/user_manager.py
+
 import jwt
 import datetime
+import threading
 from werkzeug.security import check_password_hash
 from data_m.database import Database
 
 class UserManager:
     _instance = None
+    _lock = threading.Lock()
 
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
-            cls._instance = super(UserManager, cls).__new__(cls)
+            with cls._lock:
+                if cls._instance is None:
+                    cls._instance = super(UserManager, cls).__new__(cls)
         return cls._instance
 
     def __init__(self, secret_key="your-secret-key"):

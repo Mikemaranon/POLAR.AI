@@ -81,4 +81,5 @@ class AppRoutes:
     # ================================================================================== 
 
     def get_cli(self):
-        return 0
+        # TODO: implement the CLI functionality
+        return jsonify({"message": "CLI functionality is not implemented yet."}), 501

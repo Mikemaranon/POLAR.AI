@@ -1,7 +1,25 @@
 # web_server/data_m/db_connector.py
 
 import psycopg2
-from .config import DB_CONFIG
+
+#   ||==============================================================||
+#   ||    MAIN CONFIGURATION OF NODE POSTGRE-SQL. DO NOT EDIT       ||
+#   ||    ORIGINAL VALUES BELOW                                     ||
+#   ||                                                              ||
+#   ||    - dbname: node_db                                         ||
+#   ||    - user: node_admin                                        ||
+#   ||    - password: admin123                                      ||
+#   ||    - host: localhost                                         ||
+#   ||    - port: 5400                                              ||  
+#   ||==============================================================||
+
+DB_CONFIG = {
+    "dbname": "node_db",
+    "user": "node_admin",
+    "password": "admin123",
+    "host": "localhost",
+    "port": 5400
+}
 
 class DBConnector:
     def __init__(self):

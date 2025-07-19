@@ -3,6 +3,7 @@
 import os
 import json
 import psycopg2
+from werkzeug.security import generate_password_hash
 from data_m.db_connector import DBConnector
 
 #   ||==============================================================||
@@ -109,8 +110,10 @@ class Database:
             print(f"[SELECT ERROR] fetching user failed: {e}")
         return None
 
-    def add_user(self, username: str, password_hash: str, role_level: int):
+    def add_user(self, username: str, password: str, role_level: int):
 
+        password_hash = generate_password_hash(password)
+        
         role_string = self.LEVEL_TO_ROLE.get(role_level)
         if not role_string:
             print(f"[ROLE ERROR] role level  '{role_level}' not valid. operation aborted.")
@@ -125,8 +128,45 @@ class Database:
             print(f"[INSERT ERROR] saving user '{username}' failed: {e}")
         return None
 
-    def update_user():
+    def update_user(self, username: str, new_name: str = None, new_password: str = None, new_role: int = None):
         # TODO: finish the method
+        try:
+            user_data = self.get_user(username)
+            if not user_data:
+                print(f"[UPDATE ERROR] User '{username}' not found.")
+                return False
+
+            updates = []
+            params = []
+
+            if new_name:
+                updates.append("username = %s")
+                params.append(new_name)
+                
+            if new_password:
+                updates.append("password = %s")
+                params.append(new_password)
+
+            if new_role is not None:
+                role_string = self.LEVEL_TO_ROLE.get(new_role)
+                if not role_string:
+                    print(f"[ROLE ERROR] role level '{new_role}' not valid. operation aborted.")
+                    return False
+                updates.append("role = %s")
+                params.append(role_string)
+
+            if not updates:
+                print("[UPDATE WARNING] No fields were found to update.")
+                return False
+
+            params.append(username)  # Add username for WHERE clause
+            query = f"UPDATE users SET {', '.join(updates)} WHERE username = %s;"
+
+            self.execute(query, tuple(params))
+            print(f"[SYSTEM] User '{username}' successfully updated.")
+            return True
+        except Exception as e:
+            print(f"[UPDATE ERROR] failed to update user '{username}': {e}")
         return None
 
     def delete_user(self, username: str):

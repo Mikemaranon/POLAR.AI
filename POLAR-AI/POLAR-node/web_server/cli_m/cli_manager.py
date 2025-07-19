@@ -4,14 +4,18 @@ class CliManager:
     def __init__(self):
         self.initiated = True
 
-    # ||========================================================================================||
-    # ||                          CLI MANAGER METHODS                                           ||           
-    # ||                                                                                        ||                          
-    # ||        [parse_command_input]       parse the command input string                      ||
-    # ||        [load_command_metadata]     load command metadata from the database             ||  
-    # ||        [validate_subcommand]       validate the subcommand and its arguments           ||
-    # ||        [process_command]           process the command input and return the result     ||
-    # ||========================================================================================||
+    # ||================================================================================================||
+    # ||                          CLI MANAGER METHODS                                                   ||           
+    # ||                                                                                                ||                          
+    # ||        [parse_command_input]       parse the command input string                              ||
+    # ||        [load_command_metadata]     load command metadata from the database                     ||  
+    # ||        [validate_subcommand]       validate the subcommand and its arguments                   ||
+    # ||        [process_command]           process the command input and return the result             ||
+    # ||        [import_command_module]     dynamically import the module containing the command        ||
+    # ||        [get_command_function]      get the function object for the subcommand                  ||
+    # ||        [execute_command_function]  execute the resolved function with given arguments          ||
+    # ||================================================================================================||
+
 
     def parse_command_input(self, command_str: str):
         parts = command_str.strip().split()
@@ -55,6 +59,33 @@ class CliManager:
         # return valid args
         kwargs = {k: v for k, v in parsed_args.items() if k in args_spec}
         return sub_meta, kwargs, None
+    
+    def import_command_module(self, module_name: str, command_id: str):
+        try:
+            module = __import__(f"cli_m.commands.{module_name}.{command_id}", fromlist=[command_id])
+            return module, None
+        except ModuleNotFoundError:
+            return None, f"[CLI_MANAGER] File '{command_id}.py' not found in module '{module_name}'."
+        except Exception as e:
+            return None, f"[CLI_MANAGER] Error importing module: {e}"
+
+    def get_command_function(self, module, sub_meta: dict, subcommand: str, command_id: str):
+        function_name = sub_meta.get("function")
+        if not function_name:
+            return None, f"[CLI_MANAGER] Subcommand '{subcommand}' has no assigned method."
+
+        try:
+            func = getattr(module, function_name)
+            return func, None
+        except AttributeError:
+            return None, f"[CLI_MANAGER] Method '{function_name}' not found in file '{command_id}.py'."
+
+    def execute_command_function(self, func, user_context: dict, kwargs: dict, function_name: str):
+        try:
+            return func(user_context, **kwargs)
+        except Exception as e:
+            return f"[CLI_MANAGER] Error running '{function_name}': {e}"
+
 
     def process_command(self, command_str: str, user_context: dict):
         # step 1: parse the command input
@@ -72,28 +103,15 @@ class CliManager:
         if error:
             return error
         
-        # TODO [abstract into method] step 4: dynamically import the command module
-        module_name = cmd_data["module"]  # ej: user_commands
-        try:
-            module = __import__(f"cli_m.commands.{module_name}.{command_id}", fromlist=[command_id])
-        except ModuleNotFoundError:
-            return f"[CLI_MANAGER] File '{command_id}.py' not found in module '{module_name}'."
-        except Exception as e:
-            return f"[CLI_MANAGER] Error importing module: {e}"
-        
-         # TODO [abstract into method] step 5: get the function to execute
-        function_name = sub_meta.get("function")
-        if not function_name:
-            return f"[CLI_MANAGER] Subcomand '{subcommand}' has no assigned method."
+       # step 4: import the module
+        module, error = self.import_command_module(cmd_data["module"], command_id)
+        if error:
+            return error
 
-        try:
-            func = getattr(module, function_name)
-        except AttributeError:
-            return f"[CLI_MANAGER] method '{function_name}' not found in file '{command_id}.py'."
+        # step 5: get the function
+        func, error = self.get_command_function(module, sub_meta, subcommand, command_id)
+        if error:
+            return error
 
-        # TODO [abstract into method] step 6: execute the function with the arguments and user context
-        try:
-            result = func(user_context, **kwargs)
-            return result
-        except Exception as e:
-            return f"[CLI_MANAGER] Error running '{function_name}': {e}"
+        # step 6: execute it
+        return self.execute_command_function(func, user_context, kwargs, func.__name__)

@@ -1,8 +1,6 @@
 from flask import Flask
-import sys
 import threading
 from cli_m.cli_server import CliServer
-import server 
 
 app = Flask(__name__, template_folder='../web_app', static_folder='../web_app/static')
 
@@ -10,6 +8,7 @@ def run_flask():
     print("||=================================||")
     print("||       Starting NODE server      ||")
     print("||=================================||")
+    import server
     server = server.Server(app)
     app.run(host="0.0.0.0", port=5000)
 

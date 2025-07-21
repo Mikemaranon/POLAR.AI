@@ -4,7 +4,7 @@ version: '3.9'
 
 services:
   postgres:
-    image: postgres:16
+    image: postgres:16.3
     container_name: polar_postgres
     restart: always
     environment:
@@ -14,8 +14,9 @@ services:
     ports:
       - "5400:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+     # - pgdata:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./content.sql:/docker-entrypoint-initdb.d/content.sql:ro
 
-volumes:
-  pgdata:
+# volumes:
+#   pgdata:

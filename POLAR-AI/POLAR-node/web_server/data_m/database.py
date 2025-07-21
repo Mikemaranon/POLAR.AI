@@ -1,6 +1,5 @@
 # web_server/data_m/database.py
 
-import os
 import json
 import psycopg2
 import threading
@@ -93,15 +92,15 @@ class Database:
 
         query = "SELECT username, password, role, created_at FROM users WHERE username = %s"
         try:
-            self.execute(query, (username,), fetch=True)
+            self.execute(query, (username,))
             user_data = self.fetchone()
             if user_data:
                 # returns dictionary to set compatibility with user_manager
                 return {
-                    "username": user_data[1],
-                    "password": user_data[2],
-                    "role": user_data[3],
-                    "creation": user_data[4]
+                    "username": user_data[0],
+                    "password": user_data[1],
+                    "role": user_data[2],
+                    "creation": user_data[3]
                 }
         except Exception as e:
             print(f"[SELECT ERROR] fetching user failed: {e}")

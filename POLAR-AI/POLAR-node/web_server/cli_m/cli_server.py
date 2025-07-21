@@ -78,9 +78,9 @@ class CliServer:
     def handle_client(self, conn, addr):
         with conn:
             try:
-                self.send_msg(conn, "\r\n╔══════════════════════════════════════════════╗")
-                self.send_msg(conn, "║        Welcome to POLAR Node CLI Shell       ║")
-                self.send_msg(conn, "╚══════════════════════════════════════════════╝\n")
+                self.send_msg(conn, "\r\n================================================")
+                self.send_msg(conn, "||        Welcome to POLAR Node CLI Shell       ||")
+                self.send_msg(conn, "================================================\n")
 
                 user_context = self.auth_cli_user(conn)
 

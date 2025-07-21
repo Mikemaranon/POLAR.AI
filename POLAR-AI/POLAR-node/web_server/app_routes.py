@@ -2,7 +2,7 @@ import jwt
 import zipfile
 from flask import render_template, redirect, request, url_for, jsonify
 from user_m.user_manager import UserManager
-from data_m.database import Database, USERNAME, PASSWORD
+from data_m.database import Database
 import os
 import json
 

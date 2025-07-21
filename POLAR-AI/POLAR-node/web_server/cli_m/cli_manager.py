@@ -1,7 +1,7 @@
 # web_server/cli_m/cli_manager.py
 
 import threading
-from data_m import get_command
+from data_m.database import Database
 
 class CliManager:
     _instance = None
@@ -18,6 +18,8 @@ class CliManager:
         if hasattr(self, 'initiated') and self.initiated:
             return
         self.initiated = True
+        self.get_command = Database.get_command  # alias for easier access
+
 
     # ||================================================================================================||
     # ||                          CLI MANAGER METHODS                                                   ||           
@@ -42,7 +44,7 @@ class CliManager:
         return command_id, subcommand, args, None
 
     def load_command_metadata(self, command_id: str):
-        cmd_data = get_command(command_id)
+        cmd_data = self.get_command(command_id)
         if not cmd_data:
             return None, f"[CLI_MANAGER] Command '{command_id}' not found."
         return cmd_data, None

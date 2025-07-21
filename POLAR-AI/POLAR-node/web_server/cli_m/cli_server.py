@@ -5,7 +5,7 @@ import threading
 from data_m.database import HOST, PORT, ENCODING, BUFFER_SIZE
 from user_m.user_manager import UserManager
 from cli_m.cli_manager import CliManager
-from data_m.database import Database
+from data_m.database import Database, LEVEL_TO_ROLE, ROLE_TO_LEVEL
 
 class CliServer:
     def __init__(self):
@@ -44,8 +44,10 @@ class CliServer:
             return None
 
         user_data = self.db.get_user(username)
-        if not user_data or user_data.get("level") != 4:
-            self.send_msg(conn, "\n[FORBIDDEN] Only level 4 (admin) users can access the CLI.\n")
+        if not user_data or ROLE_TO_LEVEL.get(user_data.get("role")) != 4:
+            self.send_msg(conn, "\n[FORBIDDEN ACCESS] Only level 4 (admin) users can access the CLI.\n")
+            self.send_msg(conn, "must: " + LEVEL_TO_ROLE.get(4) + " - 4")
+            self.send_msg(conn, "\n your role: " + str(user_data.get("role", "unknown")) + " - " + ROLE_TO_LEVEL.get(user_data.get("role")))
             return None
 
         self.send_msg(conn, "\n[CLI_SERVER] Welcome, admin.")
@@ -53,7 +55,7 @@ class CliServer:
 
         return {
             "username": user_data["username"],
-            "level": user_data["level"]
+            "role": user_data["role"]
         }
     
     def process_commands(self, conn, user_context):
@@ -78,9 +80,9 @@ class CliServer:
     def handle_client(self, conn, addr):
         with conn:
             try:
-                self.send_msg(conn, "\r\n================================================")
-                self.send_msg(conn, "||        Welcome to POLAR Node CLI Shell       ||")
-                self.send_msg(conn, "================================================\n")
+                self.send_msg(conn, "\r\n===================================================")
+                self.send_msg(conn, "||        Welcome to POLAR Node CLI Shell        ||")
+                self.send_msg(conn, "===================================================\n")
 
                 user_context = self.auth_cli_user(conn)
 

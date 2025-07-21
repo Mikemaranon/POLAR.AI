@@ -1,7 +1,7 @@
 
 -- user ADMIN
 INSERT INTO users (username, password, role)
-VALUES ('admin', '1234', 'admin');
+VALUES ('admin', 'pbkdf2:sha256:260000$qSDTHmM7uN6aInpW$5870269c1620466e556cf03d090f9eda04a4aa66ecc251872abb6f6f1a79680e', 'admin');
 
 -- COMMANDS FOR POLAR NODE
 INSERT INTO commands (id, module, function, sub_commands)
@@ -78,6 +78,10 @@ VALUES (
         "short": {
             "description": "Prints short system status",
             "function": "system_status_short"
+        },
+        "test": {
+            "description": "Test command for status",
+            "function": "status_test"
         }
     }'::jsonb
 );

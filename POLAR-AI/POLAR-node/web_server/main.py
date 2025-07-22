@@ -9,7 +9,6 @@ def run_flask():
     print("||=================================||")
     print("||       Starting NODE server      ||")
     print("||=================================||")
-    app.run(host="0.0.0.0", port=5000)
     Server(app)
 
 def run_cli():
@@ -25,7 +24,7 @@ if __name__ == "__main__":
     flask_thread.start()
 
     # Thread for CLI, also as daemon or not depending on whether you want it to close with the process
-    cli_thread = threading.Thread(target=run_cli, daemon=False)
+    cli_thread = threading.Thread(target=run_cli, daemon=True)
     cli_thread.start()
 
     # The main thread waits for both to finish

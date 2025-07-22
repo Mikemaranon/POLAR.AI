@@ -1,0 +1,135 @@
+/* Paleta de colores */
+
+:root {
+    --gray-1: #ffffff;              
+    --gray-2: #f9f9f9;              
+    --gray-3: #f4f4f4;              
+    --gray-4: #f1f1f1;              
+    --gray-5: #f0f0f0;              
+    --gray-6: #e4e4e4;              
+    --gray-7: #e4e4e4;              
+    --gray-8: #e3f2fd;              
+    --gray-9: #dddddd;              
+    --gray-10: #d0d0d0;             
+    --gray-11: #cccccc;             
+    --gray-12: #ccc;                
+    --gray-13: #ddd;                
+    --gray-14: #aaa;                
+    --gray-15: #686868;             
+    --gray-16: #444444;             
+    --gray-17: #333333;             
+    --gray-18: black;         
+}
+
+/* index.html */
+
+body {
+    background-color: var(--gray-5);
+    color: var(--gray-17);
+}
+
+header {
+    background-color: var(--gray-1);
+}
+
+header button {
+    background: var(--gray-6);
+}
+
+header button:hover {
+    background-color: var(--gray-10);
+}
+
+.container div {
+    border: 1px solid var(--gray-12);
+    background-color: var(--gray-7);
+}
+
+a {
+    color: var(--gray-15);
+}
+
+a:hover {
+    color: var(--gray-16);
+}
+
+/* Modal in index.html */
+
+.modal-content {
+    border: 1px solid var(--gray-12);
+    background-color: var(--gray-1);
+}
+
+.close {
+    color: var(--gray-14);
+}
+
+.close:hover,
+.close:focus {
+    color: var(--gray-18);
+}
+
+.create-model, .bot-card {
+    border: 1px solid var(--gray-12);
+    background-color: var(--gray-2);
+}
+
+/* Estilos para polaria-chat.html */
+
+.chat-box {
+    background-color: var(--gray-9);
+}
+
+.chat-container {
+    background-color: var(var(--gray-4));
+}
+
+.chat-history {
+    scrollbar-color: var(--gray-16) transparent;
+}
+
+.chat-input {
+    background-color: var(--gray-11);
+}
+
+.user-msg {
+    background-color: var(--gray-8);
+}
+
+.bot-msg {
+    background-color: var(--gray-18);
+}
+
+#message-input {
+    background-color: var(--gray-11);
+    scrollbar-color: var(--gray-16) transparent;
+}
+
+.left-menu, .right-menu {
+    background-color: var(--gray-7);
+}
+
+/* Menu elements */
+
+.chat-item, .add-chat {
+    background: var(--gray-3);
+}
+
+.options-menu {
+    background: var(--gray-1);
+    border: 1px solid var(--gray-12);
+}
+
+.menu-button:hover,
+.menu-button.delete:hover {
+    background: var(--gray-5);
+}
+
+.opt-button:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.add-chat:hover, .chat-item:hover {
+    background: var(--gray-13);
+}
+

@@ -24,6 +24,7 @@ class UserManager:
         
         self.db = Database()
         self.initialized = True
+        self.secret_key = secret_key
 
     def authenticate(self, username: str, password: str):
         user = self.db.get_user(username)
@@ -88,9 +89,9 @@ class UserManager:
         # database: SELECT FROM sessions WHERE token = %s
         session_query = self.db.get_session(token)
         if session_query != None:
-            user = query["username"]
+            user = session_query["username"]
             # database: SELECT FROM users WHERE username = %s
-            user_query = self.db.get_user(username)
+            user_query = self.db.get_user(user)
             return user_query
         return None
 

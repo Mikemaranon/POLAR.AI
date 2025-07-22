@@ -1,0 +1,109 @@
+/* Reset de estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('/static/ASSETS/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #23376d;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    margin: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #aebff3;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #2e488f;
+    border: 1px solid #2e488f;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #e4e4e4;
+    text-align: center; /* Texto centrado */
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #4369d3;
+    outline: none;
+}
+
+button {
+    background-color: #305b92;
+    color: #fff;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #3f78aa;
+}
+
+button:active {
+    background-color: #3c7a9f;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+form {
+    margin-top: 20px;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        max-width: 90%;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    input[type="text"], input[type="password"] {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 12px;
+    }
+}

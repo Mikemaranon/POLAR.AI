@@ -26,7 +26,8 @@ class AppRoutes:
         self.app.add_url_rule("/logout", "logout", self.get_logout, methods=["POST"])
 
         # userconfig routes
-        self.app.add_url_rule("/cli", "terminal", self.get_cli, methods=["POST"])
+        self.app.add_url_rule("/sites/shell", "shell", self.get_cli, methods=["POST"])
+        self.app.add_url_rule("/sites/command-forge", "command_forge", self.get_command_forge, methods=["GET"])
 
     # ==================================================================================
     #                           BASIC ROUTINGS URLs
@@ -77,9 +78,14 @@ class AppRoutes:
     # ==================================================================================
     #                           SPECIFIC ROUTINGS URLs
     #
-    #            [get_cli]         redirect to the admin config terminal
+    #            [get_cli]              redirect to the admin config terminal
+    #            [get_command_forge]    redirect to the command forge page
     # ================================================================================== 
 
     def get_cli(self):
         # TODO: implement the CLI functionality
         return jsonify({"message": "CLI functionality is not implemented yet."}), 501
+    
+    def get_command_forge(self):
+        # TODO: implement the command forge functionality
+        return jsonify({"message": "Command forge functionality is not implemented yet."}), 501

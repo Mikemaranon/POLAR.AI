@@ -196,7 +196,7 @@ class Database:
 
         query = "SELECT id, username, token, created_at FROM sessions WHERE token = %s;"
         try:
-            self.execute(query, (token,), fetch=True)
+            self.execute(query, (token,))
             session_data = self.fetchone()
             if session_data:
                 return {
@@ -213,7 +213,7 @@ class Database:
 
         query = "INSERT INTO sessions (username, token) VALUES (%s, %s) RETURNING id;"
         try:
-            self.execute(query, (username, token), fetch=True) # Fetch True for RETURNING id
+            self.execute(query, (username, token)) # Fetch True for RETURNING id
             session_id = self.fetchone()
             return session_id[0] if session_id else None
         except Exception as e:

@@ -8,16 +8,13 @@ async function handleLoginSubmit(event) {
     try {
         const response = await login(username, password)
 
-        const data = await response.json();
-        console.log(data);
-
-        if (response.ok && data.token) {
-            store_token(data.token);
-            console.log("token: ", data.token);
-            loadPage("/");
-        } else {
-            errorMessage.textContent = data.error || "An error occurred.";
+        if (!response.ok) {
+            const text = await response.text().trim();
+            errorMessage.textContent = text || "Error in servers response";
             errorMessage.style.display = "block";
+            return;
+        } else {
+            loadPage("/");
         }
     } catch (error) {
         console.error("Error during login:", error);

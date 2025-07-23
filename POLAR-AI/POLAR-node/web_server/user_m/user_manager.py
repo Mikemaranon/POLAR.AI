@@ -42,20 +42,29 @@ class UserManager:
     #     working with the request to get the token
     # ========================================================
     
+    def get_token_from_cookie(self, request):
+        token = request.cookies.get("token")
+        return token
+
+
     def get_request_token(self, request):
         auth_header = request.headers.get("Authorization")
         if auth_header and auth_header.startswith("Bearer "):
             token = auth_header.split(" ")[1]
             return token
         return None
-
+    
     def check_user(self, request):
-        token = self.get_request_token(request)
+        token = self.get_token_from_cookie(request)
+        if not token:
+            token = self.get_request_token(request)  # fallback to Authorization header
+        
         if token:
             user = self.get_user(token)
             if user:
                 return user
         return None
+
 
     # ========================================================
     #     working with the user login and token generation
@@ -68,6 +77,9 @@ class UserManager:
             'exp': expiration_time
         }
         token = jwt.encode(payload, self.secret_key, algorithm='HS256')
+
+        if isinstance(token, bytes):
+            token = token.decode('utf-8')
         return token
 
     def login(self, username: str, password: str):
@@ -109,6 +121,3 @@ class UserManager:
             return None
         except jwt.InvalidTokenError:
             return None
-
-    def get_users(self):
-        return self.users

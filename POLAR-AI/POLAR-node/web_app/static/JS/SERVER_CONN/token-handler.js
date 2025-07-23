@@ -1,22 +1,3 @@
-const TOKEN_KEY = "auth_token";
-
-function store_token(token) {
-    try {
-        delete_token(); // Clear any existing token
-    } catch (error) {
-        console.error("Error deleting existing token:", error);
-    }
-    localStorage.setItem(TOKEN_KEY, token);
-    console.log("Token stored:", token);
-}
-
-function getToken() {
-    return localStorage.getItem(TOKEN_KEY);
-}
-
-function delete_token() {
-    localStorage.removeItem(TOKEN_KEY);
-}
 
 async function login(username, password) {
     const endpoint = "/login";
@@ -29,7 +10,8 @@ async function login(username, password) {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ username, password }),
+        credentials: 'include'
     };
 
     console.log("loging... :", endpoint, options);
@@ -48,24 +30,18 @@ async function login(username, password) {
 }
 
 async function send_API_request(method, endpoint, body = null) {
-    const token = localStorage.getItem(TOKEN_KEY);
-    if (!token) {
-        throw new Error("No authentication token found.");
-    }
 
     const options = {
         method: method.toUpperCase(),
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + token
-        }
+        },
+        credentials: 'include'
     };
     
     if (body && method.toUpperCase() !== "GET") {
         options.body = JSON.stringify(body);
     }
-
-    console.log("Fetching:", endpoint, options);
 
     try {
         const response = await fetch(endpoint, options);
@@ -80,11 +56,30 @@ async function send_API_request(method, endpoint, body = null) {
     }
 }
 
-async function loadPage(url) {
-    const token = getToken();
+async function logout() {
+    const endpoint = "/logout";
+
+    const options = {
+        method: "POST",
+        credentials: 'include'
+    };
+
     try {
-        const response = await send_API_request("GET", url);
-        window.location.href = response.url
+        const response = await fetch(endpoint, options);
+
+        if (!response.ok) {
+            throw new Error(`Logout failed: ${response.status}`);
+        }
+        return response;
+    } catch (error) {
+        console.error("Error during logout:", error);
+        throw error;
+    }
+}
+
+async function loadPage(url) {
+    try {
+        window.location.href = url
     } catch (error) {
         console.error("Error loading page:", error);
         // window.location.href = "/login";

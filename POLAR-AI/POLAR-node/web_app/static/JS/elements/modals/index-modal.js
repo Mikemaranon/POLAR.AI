@@ -3,7 +3,7 @@ document.getElementById('database-card').onclick = async function () {
         const response = await send_API_request('GET', '/sites/database');
 
         if (response.ok) {
-            window.location.href = response.url;
+            loadPage(response.url);
         }
     } catch (error) {
         console.error("Error accediendo a /sites/database:", error);

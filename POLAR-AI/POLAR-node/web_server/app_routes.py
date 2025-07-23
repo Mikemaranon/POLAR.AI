@@ -1,10 +1,7 @@
-import jwt
-import zipfile
-from flask import render_template, redirect, request, url_for, jsonify
+
+from flask import render_template, redirect, request, url_for, jsonify, make_response
 from user_m.user_manager import UserManager
 from data_m.database import Database
-import os
-import json
 
 class AppRoutes:
     def __init__(self, app, user_manager: UserManager, database: Database):
@@ -21,7 +18,6 @@ class AppRoutes:
 
     def _register_routes(self):
         self.app.add_url_rule("/", "home", self.get_home, methods=["GET"])
-        self.app.add_url_rule("/index", "index", self.get_index)
         self.app.add_url_rule("/login", "login", self.get_login, methods=["GET", "POST"])
         self.app.add_url_rule("/logout", "logout", self.get_logout, methods=["POST"])
 
@@ -39,31 +35,37 @@ class AppRoutes:
     #            [get_logout]           log user out, send to index.html 
     # ================================================================================== 
     
-    def get_index(self):
-        return render_template("index.html")
-    
     def get_home(self):
         user = self.user_manager.check_user(request)
         if user:            
-            return redirect(url_for("index"))  # Redirect to index.html
+            return render_template("index.html", user=user)  # Redirect to index.html
         return render_template("login.html")
 
+    def index(self):
+        return None
+
     def get_login(self):
-        error_message = None
         if request.method == "POST":
             data = request.get_json()
-
             username = data.get("username")
             password = data.get("password")
 
             token = self.user_manager.login(username, password)
             if token:
-                response = jsonify({"token": token})
+                response = jsonify(success=True)
+                response.set_cookie(
+                    'token',
+                    token,
+                    httponly=True,
+                    secure=False,     
+                    samesite='Strict',
+                    max_age=3600      
+                )
                 return response
             
-            error_message = "incorrect user data, try again"
+            return jsonify(error="Incorrect user data, try again"), 401
 
-        return render_template("login.html", error_message=error_message)
+        return render_template("login.html")
 
     def get_logout(self):
         
@@ -89,11 +91,11 @@ class AppRoutes:
     
     def get_database(self):
         # Check if the user is authenticated
-        token = self.user_manager.get_request_token(request)
-        if not token:
-            return jsonify({"error": "Unauthorized"}), 401
+        user = self.user_manager.check_user(request)
+        if user:
+            return render_template("sites/database.html")
         
-        return render_template("database.html")
+        return jsonify({"error": "Unauthorized"}), 401
     
     def get_command_forge(self):
         # TODO: implement the command forge functionality

@@ -15,7 +15,6 @@ body {
 }
 
 main {
-    margin-top: 5rem; /* espacio para el header fijo */
     margin-bottom: -2rem; /* espacio para el footer fijo */
     display: flex;
     flex-direction: column;

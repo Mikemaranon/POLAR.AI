@@ -1,3 +1,7 @@
+main {
+    margin-top: 5rem; /* space for fixed header */
+}
+
 header {
     display: flex;
     height: 90px;
@@ -29,4 +33,21 @@ header button {
     border: none;
     background: none;
     text-align: center;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 1rem;
+        align-items: flex-start;
+    }
+
+    header h1 {
+        display: none;
+    }
 }

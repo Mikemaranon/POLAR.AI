@@ -5,137 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Plantilla POLAR</title>
 
-    <link rel="stylesheet" href="/static/CSS/index.css">
+    <link rel="stylesheet" href="/static/CSS/database.css">
     <link rel="stylesheet" href="/static/CSS/logo.css">
     <link rel="stylesheet" href="/static/CSS/elements/header.css">
     <link rel="stylesheet" href="/static/CSS/elements/toggle-theme.css">
     <link rel="stylesheet" href="/static/CSS/elements/modal.css">
     <link rel="stylesheet" href="/static/CSS/fonts/fonts.css">
     <link id="theme-style" rel="stylesheet" href="/static/CSS/themes/bright-theme.css">
-  <style>
-    /* Estilos base */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: sans-serif;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    /* CONTENEDOR PRINCIPAL */
-    .layout {
-      display: flex;
-      height: 100vh;
-      padding-top: 60px; /* compensar header fijo */
-    }
-
-    /* SIDEBAR */
-    .sidebar {
-      width: 250px;
-      background-color: #f0f0f0;
-      overflow-y: auto;
-      border-right: 1px solid #ccc;
-    }
-
-    .sidebar ul {
-      list-style: none;
-      padding: 10px;
-    }
-
-    .sidebar li {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-      cursor: pointer;
-    }
-
-    .sidebar li:hover {
-      background-color: #e0e0e0;
-    }
-
-    /* CONTENIDO PRINCIPAL */
-    .main-content {
-      flex: 1;
-      overflow-y: auto;
-      padding: 20px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    th, td {
-      border: 1px solid #aaa;
-      padding: 8px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #eee;
-    }
-  </style>
 </head>
 <body>
 
-  <header>
-    <!-- Tu header personalizado -->
-    <h1>Database</h1>
-    <label class="theme-toggle">
+    <header>
+        <h1>Database</h1>
+        <label class="theme-toggle">
             <input type="checkbox" id="theme-toggle-checkbox">
             <span class="slider"></span>
         </label>
         <button onclick="loadPage('/sites/shell')">>_</button>
-  </header>
+    </header>
 
-  <div class="layout">
-    <aside class="sidebar">
-      <ul>
-        <li>usuarios</li>
-        <li>sesiones</li>
-        <li>comandos</li>
-        <!-- Más tablas acá -->
-      </ul>
-    </aside>
+    <div class="layout">
+        <aside class="sidebar">
+            <h2>Tables</h2>
+            <ul>
+                <li>users</li>
+                <li>sessions</li>
+                <li>commands</li>
+            </ul>
+        </aside>
 
-    <main class="main-content">
-      <h2>Contenido de tabla</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Rol</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mike</td>
-            <td>Developer</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Lucho</td>
-            <td>Admin</td>
-          </tr>
-        </tbody>
-      </table>
-    </main>
-  </div>
+        <main class="main-content">
+        <h2>Contenido de tabla</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Rol</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Mike</td>
+                <td>Developer</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Lucho</td>
+                <td>Admin</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="json-viewer">
+            <h2>JSON Viewer</h2>
 
-  <script>
-    // JS opcional para interacciones futuras
-    document.querySelectorAll('.sidebar li').forEach(item => {
-      item.addEventListener('click', () => {
-        alert('Cargar tabla: ' + item.textContent);
-        // Acá podrías llamar a una función para cargar los datos de esa tabla
-      });
-    });
-  </script>
+        </div>
+        </main>
+    </div>
 </body>
 </html>

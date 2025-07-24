@@ -1,0 +1,48 @@
+.search-bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 60px;
+    width: auto;
+    margin-top: 10px;
+    background-color: #f0f0f0;
+    padding: 0 20px;
+}
+
+.type-1 {
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-bar input {
+    flex: 1;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.2rem;
+}
+
+.search-bar button {
+    position: absolute;
+    opacity: 0.6;
+    right: 2px;
+    height: 55px;
+    width: 55px;
+    border: none;
+    border-radius: 50%;
+    background-image: url('/static/ASSETS/search-icon.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60% 60%;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+
+.search-bar button:hover {
+    background-color: #dbdbdb;
+}

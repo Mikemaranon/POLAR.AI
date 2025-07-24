@@ -113,3 +113,5 @@ class CommandsTable:
         except Exception as e:
             print(f"[DELETE ERROR] failed to delete command '{command_id}': {e}")
             return False
+
+    

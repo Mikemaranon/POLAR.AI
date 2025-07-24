@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/static/CSS/database.css">
     <link rel="stylesheet" href="/static/CSS/logo.css">
     <link rel="stylesheet" href="/static/CSS/elements/header.css">
+    <link rel="stylesheet" href="/static/CSS/elements/search-bar.css">
     <link rel="stylesheet" href="/static/CSS/elements/toggle-theme.css">
     <link rel="stylesheet" href="/static/CSS/elements/modal.css">
     <link rel="stylesheet" href="/static/CSS/fonts/fonts.css">
@@ -27,6 +28,10 @@
     <div class="layout">
         <aside class="sidebar">
             <h2>Tables</h2>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="search tables" />
+                <button id="search-button"></button>
+            </div>
             <ul>
                 <li>users</li>
                 <li>sessions</li>
@@ -35,32 +40,39 @@
         </aside>
 
         <main class="main-content">
-        <h2>Contenido de tabla</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Rol</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>Mike</td>
-                <td>Developer</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Lucho</td>
-                <td>Admin</td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="json-viewer">
-            <h2>JSON Viewer</h2>
+            <div class="search-bar type-1">
+                <input type="text" id="search-input" placeholder="search in table" />
+                <button id="search-button"></button>
+            </div>
+            <div class="db-table">
+                <h2>Contenido de tabla</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Rol</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Mike</td>
+                        <td>Developer</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Lucho</td>
+                        <td>Admin</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="json-viewer">
+                <h2>JSON Viewer</h2>
 
-        </div>
+            </div>
         </main>
     </div>
 </body>

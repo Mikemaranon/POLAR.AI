@@ -19,6 +19,8 @@ class ApiManager:
 
     def _register_APIs(self):
         self.app.add_url_rule("/api/check", "check", self.API_check, methods=["GET"])
+        self.app.add_url_rule("/api/db/tables", "get_tables", self.API_get_tables, methods=["GET"])
+        self.app.add_url_rule("/api/db/table-content", "get_table_content", self.API_get_table_content, methods=["GET"])
     
     # =========================================
     #       API protocols start from here
@@ -28,4 +30,23 @@ class ApiManager:
     def API_check(self):
         return jsonify({"status": "ok"}), 200
     
+    # endpoint to get the list of tables in the database
+    def API_get_tables(self):
+        try:
+            tables = self.database.get_tables()
+            return jsonify({"tables": tables}), 200
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+        
+    # endpoint to get the content of a specific table
+    def API_get_table_content(self):
+        table_name = request.args.get("table_name")
+        if not table_name:
+            return jsonify({"error": "Table name is required"}), 400
+        
+        try:
+            columns = self.database.get_table_content(table_name)
+            return jsonify({"content": columns}), 200
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
     

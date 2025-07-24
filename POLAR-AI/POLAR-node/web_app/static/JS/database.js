@@ -1,6 +1,7 @@
 
 let table_list;
 let table_content;
+let selectedRowData = null;
 
 // ==============================
 //         ON LOAD EVENT
@@ -98,15 +99,84 @@ function renderTableContent(tableName, content, headers) {
     const tbody = document.createElement("tbody");
     content.forEach((row) => {
         const tr = document.createElement("tr");
+        tr.id = row["id"];
+
+        tr.addEventListener("click", () => {
+            // remove class "selected" from all rows
+            const allRows = tbody.querySelectorAll("tr");
+            allRows.forEach(r => r.classList.remove("selected"));
+
+            // add class "selected" to the clicked row
+            tr.classList.add("selected");
+
+            // save data
+            selectedRowData = row;
+
+            // show JSON data in the viewer
+            const viewer = document.getElementById("json-viewer");
+            viewer.innerHTML = syntaxHighlight(row);
+
+            const copyBtn = document.getElementById("copy-json-btn");
+            copyBtn.onclick = () => copyJSONToClipboard(row);
+        });
+
         headers.forEach((key) => {
             const td = document.createElement("td");
             td.textContent = row[key];
             tr.appendChild(td);
         });
+
         tbody.appendChild(tr);
     });
     tableEl.appendChild(tbody);
 }
 
+// ==============================
+//      JSON viewer functions
+// ==============================
 
+function syntaxHighlight(json) {
+    if (typeof json != 'string') {
+        json = JSON.stringify(json, null, 2);
+    }
+
+    json = json
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(?:\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, (match) => {
+        let cls = 'json-number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'json-key';
+            } else {
+                cls = 'json-string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'json-boolean';
+        } else if (/null/.test(match)) {
+            cls = 'json-null';
+        }
+        return `<span class="${cls}">${match}</span>`;
+    });
+}
+
+function copyJSONToClipboard(jsonObj) {
+    const text = JSON.stringify(jsonObj, null, 2);
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById("copy-json-btn");
+        const originalText = btn.textContent;
+        btn.textContent = "✔️";
+        setTimeout(() => {
+            btn.textContent = originalText;
+        }, 1500);
+    }).catch(err => {
+        console.error("Error al copiar:", err);
+    });
+}
+
+// ==============================
+//      SEARCH FUNCTIONALITY
+// ==============================
 

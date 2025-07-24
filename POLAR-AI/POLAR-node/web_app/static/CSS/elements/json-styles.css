@@ -1,0 +1,47 @@
+.json-key {
+    color: #0074D9;
+    font-weight: bold;
+}
+
+.json-string {
+    color: #2ECC40;
+}
+
+.json-number {
+    color: #FF851B;
+}
+
+.json-boolean {
+    color: #B10DC9;
+}
+
+.json-null {
+    color: #AAAAAA;
+}
+
+/* JSON Viewer Styles */
+
+.json-viewer {
+    white-space: pre;
+    font-family: monospace;
+    margin: 0;
+}
+
+#copy-json-btn {
+    position: relative;
+    z-index: 10;
+    top: -10px;
+    margin-left: 30px;
+    background-color: #9e9e9e;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.2s ease;
+}
+
+#copy-json-btn:hover {
+    background-color: #005fa3;
+}

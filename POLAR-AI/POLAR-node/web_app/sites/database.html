@@ -6,11 +6,10 @@
     <title>Database</title>
 
     <link rel="stylesheet" href="/static/CSS/database.css">
-    <link rel="stylesheet" href="/static/CSS/logo.css">
     <link rel="stylesheet" href="/static/CSS/elements/header.css">
     <link rel="stylesheet" href="/static/CSS/elements/search-bar.css">
     <link rel="stylesheet" href="/static/CSS/elements/toggle-theme.css">
-    <link rel="stylesheet" href="/static/CSS/elements/modal.css">
+    <link rel="stylesheet" href="/static/CSS/elements/json-styles.css">
     <link rel="stylesheet" href="/static/CSS/fonts/fonts.css">
     <link id="theme-style" rel="stylesheet" href="/static/CSS/themes/bright-theme.css">
 </head>
@@ -29,7 +28,7 @@
         <aside class="sidebar">
             <h2>Tables</h2>
             <div class="search-bar">
-                <input type="text" id="search-input" placeholder="search tables" />
+                <input type="text" id="search-input-tables" placeholder="search tables" />
                 <button id="search-button"></button>
             </div>
             <ul id="table-list">
@@ -39,7 +38,7 @@
 
         <main class="main-content">
             <div class="search-bar type-1">
-                <input type="text" id="search-input" placeholder="search in table" />
+                <input type="text" id="search-input-collumns" placeholder="search in table" />
                 <button id="search-button"></button>
             </div>
             <h2 id="table-title">No table selected yet</h2>
@@ -49,9 +48,9 @@
                 </table>
             </div>
             <h2>JSON Viewer</h2>
-            <div class="json-viewer">
-                <!--<textarea id="json-textarea" placeholder="JSON data will be displayed here..."></textarea>
-                <button id="copy-json-button">Copy JSON</button>-->
+            <button id="copy-json-btn">📋 Copy</button>
+            <div class="json-container" style="font-family: monospace;">
+                <pre id="json-viewer"></pre>
             </div>
         </main>
     </div>

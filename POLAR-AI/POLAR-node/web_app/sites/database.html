@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plantilla POLAR</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plantilla POLAR</title>
+
+    <link rel="stylesheet" href="/static/CSS/index.css">
+    <link rel="stylesheet" href="/static/CSS/logo.css">
+    <link rel="stylesheet" href="/static/CSS/elements/header.css">
+    <link rel="stylesheet" href="/static/CSS/elements/toggle-theme.css">
+    <link rel="stylesheet" href="/static/CSS/elements/modal.css">
+    <link rel="stylesheet" href="/static/CSS/fonts/fonts.css">
+    <link id="theme-style" rel="stylesheet" href="/static/CSS/themes/bright-theme.css">
   <style>
     /* Estilos base */
     * {
@@ -16,21 +24,6 @@
       font-family: sans-serif;
       height: 100vh;
       overflow: hidden;
-    }
-
-    /* HEADER FIJO */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 60px;
-      background-color: rgba(0, 0, 0, 0.8);
-      color: white;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
     }
 
     /* CONTENEDOR PRINCIPAL */
@@ -91,7 +84,12 @@
 
   <header>
     <!-- Tu header personalizado -->
-    <h1>POLAR Node</h1>
+    <h1>Database</h1>
+    <label class="theme-toggle">
+            <input type="checkbox" id="theme-toggle-checkbox">
+            <span class="slider"></span>
+        </label>
+        <button onclick="loadPage('/sites/shell')">>_</button>
   </header>
 
   <div class="layout">

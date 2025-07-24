@@ -18,7 +18,7 @@ class CliManager:
         if hasattr(self, 'initiated') and self.initiated:
             return
         self.initiated = True
-        self.get_command = Database().get_command  # alias for easier access
+        self.get_command = Database().t_commands.get_command  # alias for easier access
 
 
     # ||================================================================================================||

@@ -30,6 +30,9 @@ class Server:
             port=port
         )
         
+        # Clear sessions on initialization
+        self.database.t_sessions.clear_sessions()
+        
     def ini_database(self):
         return Database()
 

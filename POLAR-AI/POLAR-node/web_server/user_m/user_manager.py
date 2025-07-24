@@ -27,7 +27,7 @@ class UserManager:
         self.secret_key = secret_key
 
     def authenticate(self, username: str, password: str):
-        user = self.db.get_user(username)
+        user = self.db.t_users.get_user(username)
 
         if user:
             print("Stored hashed password:", user["password"])
@@ -86,24 +86,24 @@ class UserManager:
         if self.authenticate(username, password):
             token = self.generate_token(username)
             # database: INSERT INTO sessions VALUES(username, token)
-            self.db.save_session(username=username, token=token)
+            self.db.t_sessions.save_session(username=username, token=token)
             return token
         return None
 
     def logout(self, token):
         # database: DELETE FROM sessions WHERE token = %s
-        query = self.db.delete_session(token)
+        query = self.db.t_sessions.delete_session(token)
         if query:
             return {'status': 'success'}, 200 # TODO: CHANGE THIS TO TRUE/FALSE, JSON TO API
         return {'status': 'not found'}, 404
 
     def get_user(self, token):
         # database: SELECT FROM sessions WHERE token = %s
-        session_query = self.db.get_session(token)
+        session_query = self.db.t_sessions.get_session(token)
         if session_query != None:
             user = session_query["username"]
             # database: SELECT FROM users WHERE username = %s
-            user_query = self.db.get_user(user)
+            user_query = self.db.t_users.get_user(user)
             return user_query
         return None
 

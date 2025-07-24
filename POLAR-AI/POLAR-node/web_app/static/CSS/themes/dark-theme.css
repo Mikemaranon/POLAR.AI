@@ -43,7 +43,7 @@
     /* modal elements */
     --modal-color: var(--gray-15);
     --modal-border: var(--gray-5);
-    --modal-cont-bg: var(--gray-9);
+    --modal-cont-bg: var(--gray-8);
     --modal-bg-color: var(--gray-3);
 }
 
@@ -162,7 +162,7 @@ a:hover {
     color: black;
 }
 
-.create-model, .bot-card {
+.create-model, .opt-card {
     border: 1px solid var(--modal-border);
     background-color: var(--modal-cont-bg);
 }

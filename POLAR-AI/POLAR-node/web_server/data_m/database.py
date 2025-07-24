@@ -127,7 +127,7 @@ class Database:
             SELECT column_name, data_type
             FROM information_schema.columns
             WHERE table_schema = 'public'
-            AND table_name = %s;
+            AND table_name = %s
             ORDER BY ordinal_position;
         """
         self.execute(query, (table_name,))

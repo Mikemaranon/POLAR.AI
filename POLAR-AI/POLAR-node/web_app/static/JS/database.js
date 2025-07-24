@@ -1,4 +1,7 @@
 
+let table_list;
+let table_content;
+
 // ==============================
 //         ON LOAD EVENT
 // ==============================
@@ -23,7 +26,11 @@ async function getData(method, endpoint, body = null) {
 
 async function loadTableList() {
     const data = await getData("GET", "/api/db/tables");
-    if (data) renderTableList(data.tables);
+    
+    if (data) {
+        table_list = data.tables || [];
+        renderTableList(data.tables);
+    }
 }
 
 // ==============================
@@ -53,18 +60,18 @@ async function loadTableContent(tableName) {
     if (response && response.content && Array.isArray(response.content.data)) {
         console.log(response.content.columns);
         const headers = response.content.columns.map(col => col.name);
+        table_content = response.content.data;
         renderTableContent(tableName, response.content.data, headers);
     } else {
-        renderTableContent(tableName, []);
+        renderTableContent(tableName, [], []);
     }
 }
-
 
 // ==============================
 //      RENDER TABLE CONTENT
 // ==============================
 
-function renderTableContent(tableName, content) {
+function renderTableContent(tableName, content, headers) {
     const titleEl = document.getElementById("table-title");
     const tableEl = document.getElementById("table-content");
 
@@ -77,7 +84,6 @@ function renderTableContent(tableName, content) {
     }
 
     // create table headers
-    const headers = Object.keys(content[0]);
     const thead = document.createElement("thead");
     const headRow = document.createElement("tr");
     headers.forEach((key) => {
@@ -93,9 +99,9 @@ function renderTableContent(tableName, content) {
     content.forEach((row) => {
         const tr = document.createElement("tr");
         headers.forEach((key) => {
-        const td = document.createElement("td");
-        td.textContent = row[key];
-        tr.appendChild(td);
+            const td = document.createElement("td");
+            td.textContent = row[key];
+            tr.appendChild(td);
         });
         tbody.appendChild(tr);
     });

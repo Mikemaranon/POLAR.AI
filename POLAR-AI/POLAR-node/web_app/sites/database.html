@@ -16,7 +16,12 @@
 <body>
 
     <header>
-        <h1>Database</h1>
+        <div class="title-wrapper">
+            <div class="title-inner">
+                <h1>Database</h1>
+                <button class="none" onclick="loadPage('/')"><h1>return</h1></button>
+            </div>
+        </div>
         <label class="theme-toggle">
             <input type="checkbox" id="theme-toggle-checkbox">
             <span class="slider"></span>
@@ -24,8 +29,9 @@
         <button onclick="loadPage('/sites/shell')">>_</button>
     </header>
 
+
     <div class="layout">
-        <aside class="sidebar">
+        <aside class="db-sidebar">
             <h2>Tables</h2>
             <div class="search-bar">
                 <input type="text" id="search-input-tables" placeholder="search tables" />
@@ -36,7 +42,7 @@
             </ul>
         </aside>
 
-        <main class="main-content">
+        <main class="db-main-content">
             <div class="search-bar type-1">
                 <input type="text" id="search-input-collumns" placeholder="search in table" />
                 <button id="search-button"></button>
@@ -56,5 +62,6 @@
     </div>
 </body>
 <script src="/static/JS/database.js"></script>
+<script src="/static/JS/elements/toggle-theme.js"></script>
 <script src="/static/JS/SERVER_CONN/token-handler.js"></script>
 </html>

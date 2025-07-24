@@ -8,7 +8,7 @@
     --gray-5: #f0f0f0;              
     --gray-6: #e4e4e4;              
     --gray-7: #e4e4e4;              
-    --gray-8: #e3f2fd;              
+    --gray-8: #ebebeb;              
     --gray-9: #dddddd;              
     --gray-10: #d0d0d0;             
     --gray-11: #cccccc;             
@@ -21,10 +21,15 @@
     --gray-18: black;         
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray-14) transparent;
+}
+
 /* index.html */
 
 body {
-    background-color: var(--gray-5);
+    background-color: var(--gray-8);
     color: var(--gray-17);
 }
 
@@ -133,3 +138,54 @@ a:hover {
     background: var(--gray-13);
 }
 
+
+/* database.css */ 
+
+.db-sidebar {
+    background-color: var(--gray-5);
+    border-right: 1px solid var(--gray-12);
+}
+
+.db-sidebar h2 {
+    background-color: var(--gray-6);
+    border-bottom: 1px solid var(--gray-12);
+}
+
+.db-sidebar li {
+    border-bottom: 1px solid var(--gray-13);
+}
+
+.db-sidebar li:hover {
+    background-color: var(--gray-6);
+}
+
+.db-main-content h2 {
+    color: var(--gray-17);
+}
+
+tr.selected {
+    background-color: #cce5ff !important;
+}
+
+.db-table th, .db-table td {
+    border: 1px solid var(--gray-14);
+}
+
+.db-table th {
+    background-color: var(--gray-7);
+}
+
+/* Search bar */
+
+.search-bar {
+    background-color: transparent;
+}
+
+.type-1 {
+    background-color: var(--gray-5);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-bar button:hover {
+    background-color: var(--gray-9);
+}

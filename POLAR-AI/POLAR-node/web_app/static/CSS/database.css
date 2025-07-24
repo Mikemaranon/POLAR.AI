@@ -14,55 +14,45 @@ body {
 .layout {
     display: flex;
     height: 100vh;
-    padding-top: 60px; /* compensar header fijo */
+    padding-top: 60px; /* compensate fixed header */
 }
 
 /* side bar: displays tables */
 
-.sidebar {
+.db-sidebar {
     margin-top: 30px;
     width: 250px;
-    background-color: #f0f0f0;
     overflow-y: auto;
-    border-right: 1px solid #ccc;
 }
 
-.sidebar h2 {
+.db-sidebar h2 {
     text-align: center;
     padding: 10px;
-    background-color: #e0e0e0;
-    border-bottom: 1px solid #ccc;
 }
 
-.sidebar ul {
+.db-sidebar ul {
     list-style: none;
     padding: 10px;
 }
 
-.sidebar li {
+.db-sidebar li {
     padding: 10px;
-    border-bottom: 1px solid #ddd;
     cursor: pointer;
-}
-
-.sidebar li:hover {
-    background-color: #e0e0e0;
 }
 
 /* main content of the html */
 
-.main-content {
+.db-main-content {
     flex: 1;
     margin-top: 30px;
     overflow-y: auto;
     padding: 20px;
 }
 
-.main-content h2 {
+.db-main-content h2 {
     margin-top: 30px;
     margin-bottom: 30px;
     margin-left: 30px;
-    color: #333;
 }
 
 .db-table, .json-container {
@@ -75,18 +65,13 @@ body {
     overflow: auto; 
 }
 
-table {
+.db-table table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
 }
 
-tr.selected {
-    background-color: #cce5ff !important;
-}
-
-th, td {
-    border: 1px solid #aaa;
+.db-table th, .db-table td {
     padding: 8px;
     text-align: left;
     max-width: 100px;
@@ -95,7 +80,4 @@ th, td {
     text-overflow: ellipsis;
 }
 
-th {
-    background-color: #eee;
-}
 

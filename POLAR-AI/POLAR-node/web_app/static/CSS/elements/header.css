@@ -15,7 +15,7 @@ header {
     padding: 1rem;
 }
 
-header h1 {
+.static-title {
     font-family: 'Orbitron', sans-serif;
     position: absolute;
     left: 50%;
@@ -35,9 +35,62 @@ header button {
     text-align: center;
 }
 
+.none {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+}
+
+.none:hover {
+    background-color: transparent;
+}
+
+.title-wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 40px; 
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    top: 25px;
+}
+
+.title-inner {
+    display: flex;
+    transform: translateY(25%);
+    flex-direction: column;
+    transition: transform 0.4s ease;
+}
+
+.title-wrapper:hover .title-inner {
+    transform: translateY(-25%);
+}
+
+.title-wrapper h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 40px;
+    line-height: 40px;
+    white-space: nowrap;
+    margin: 0;
+    text-align: center;
+    pointer-events: none;
+    /* sacamos position absoluta y transform de acá */
+}
+
+
 @media (max-width: 768px) {
     header h1 {
         font-size: 2rem;
+    }
+
+    .title-wrapper h1 {
+        font-size: 2rem;
+        line-height: 2rem;
+    }
+
+    .title-wrapper {
+        height: 2rem;
     }
 }
 
@@ -48,6 +101,10 @@ header button {
     }
 
     header h1 {
+        display: none;
+    }
+
+    .title-wrapper {
         display: none;
     }
 }

@@ -47,6 +47,10 @@
     --modal-bg-color: var(--gray-3);
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #555 transparent;
+}
 
 body {
     background-color: var(--bg-color);
@@ -146,7 +150,7 @@ a:hover {
     background: var(--items-hover);
 }
 
-/* Modal in index.html */
+/* Modal */
 
 .modal-content {
     border: 1px solid var(--modal-border);
@@ -165,4 +169,55 @@ a:hover {
 .create-model, .opt-card {
     border: 1px solid var(--modal-border);
     background-color: var(--modal-cont-bg);
+}
+
+/* database.css */ 
+
+.db-sidebar {
+    background-color: var(--gray-5);
+}
+
+.db-sidebar h2 {
+    background-color: var(--gray-8);
+    border-bottom: 1px solid var(--gray-12);
+}
+
+.db-sidebar li {
+    border-bottom: 1px solid var(--gray-8);
+}
+
+.db-sidebar li:hover {
+    background-color: var(--gray-9);
+}
+
+.db-main-content h2 {
+    color: var(--gray-17);
+}
+
+tr.selected {
+    background-color: #445069 !important;
+}
+
+.db-table th, .db-table td {
+    border: 0.1px solid var(--gray-9);
+}
+
+.db-table th {
+    background-color: var(--gray-7);
+}
+
+
+/* Search bar */
+
+.search-bar {
+    background-color: transparent;
+}
+
+.type-1 {
+    background-color: var(--gray-5);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-bar button:hover {
+    background-color: var(--gray-9);
 }

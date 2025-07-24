@@ -23,7 +23,7 @@ async function getData(method, endpoint, body = null) {
 
 async function loadTableList() {
     const data = await getData("GET", "/api/db/tables");
-    if (data) renderTableList(data);
+    if (data) renderTableList(data.tables);
 }
 
 // ==============================
@@ -49,9 +49,16 @@ function renderTableList(tables) {
 // ==============================
 
 async function loadTableContent(tableName) {
-    const data = await getData("GET", `/api/db/table-content`, { "table_name": tableName });
-    if (data) renderTableContent(tableName, data);
+    const response = await getData("POST", `/api/db/table-content`, { "table_name": tableName });
+    if (response && response.content && Array.isArray(response.content.data)) {
+        console.log(response.content.columns);
+        const headers = response.content.columns.map(col => col.name);
+        renderTableContent(tableName, response.content.data, headers);
+    } else {
+        renderTableContent(tableName, []);
+    }
 }
+
 
 // ==============================
 //      RENDER TABLE CONTENT

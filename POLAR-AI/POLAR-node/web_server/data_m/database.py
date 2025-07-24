@@ -104,6 +104,21 @@ class Database:
     #          GENERAL DATABASE METHODS
     # =============================================
 
+    def get_tables(self):
+        query = """
+            SELECT table_name
+            FROM information_schema.tables
+            WHERE table_schema = 'public'
+            AND table_type = 'BASE TABLE';
+        """
+        try:
+            self.execute(query)
+            tables = self.fetchall()
+            return [table[0] for table in tables]
+        except Exception as e:
+            print(f"[SELECT ERROR] fetching tables failed: {e}")
+            return []
+
     def get_columns(self, table_name: str) -> dict[str, str]:
         if not table_name:
             raise ValueError("Table name cannot be empty")
@@ -113,17 +128,18 @@ class Database:
             FROM information_schema.columns
             WHERE table_schema = 'public'
             AND table_name = %s;
+            ORDER BY ordinal_position;
         """
         self.execute(query, (table_name,))
         columns = self.fetchall()
         if not columns:
             raise ValueError(f"Table '{table_name}' not found")
 
-        return {col[0]: col[1] for col in columns}
+        return [{"name": col[0], "type": col[1]} for col in columns]
 
     def get_table_content(self, table_name: str) -> dict:
-        columns_info = self.get_columns(table_name)  # dict {col: type}
-        columns = list(columns_info.keys())
+        columns_info = self.get_columns(table_name)
+        columns = [col["name"] for col in columns_info]
 
         query = f'SELECT * FROM "{table_name}";'
         self.execute(query)
@@ -135,7 +151,7 @@ class Database:
             record = {}
             for i, col in enumerate(columns):
                 value = row[i]
-                if columns_info[col] == "jsonb" and value:
+                if columns_info[i]["type"] == "jsonb" and value:
                     try:
                         value = json.loads(value) if isinstance(value, str) else value
                     except Exception:
@@ -144,5 +160,6 @@ class Database:
             data.append(record)
 
         return {"columns": columns_info, "data": data}
+
 
 

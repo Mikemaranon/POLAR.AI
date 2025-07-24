@@ -1,6 +1,6 @@
 import jwt
 import zipfile
-from flask import render_template, redirect, request, url_for, jsonify
+from flask import request, jsonify
 from user_m.user_manager import UserManager
 from data_m.database import Database
 import os
@@ -13,9 +13,9 @@ class ApiManager:
         self.database = database
         self._register_APIs()
     
-    # ==================================================================================
+    # =========================================================
     #                     REGISTERING APIs
-    # ================================================================================== 
+    # =========================================================
 
     def _register_APIs(self):
         self.app.add_url_rule("/api/check", "check", self.API_check, methods=["GET"])

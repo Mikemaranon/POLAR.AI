@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Terminal POLAR</title>
+
+    <link rel="stylesheet" href="/static/CSS/shell.css">
+    <link rel="stylesheet" href="/static/CSS/elements/header.css">
+    <link rel="stylesheet" href="/static/CSS/elements/toggle-theme.css">
+    <link rel="stylesheet" href="/static/CSS/fonts/fonts.css">
+    <link id="theme-style" rel="stylesheet" href="/static/CSS/themes/bright-theme.css">
+
+</head>
+<body>
+    <header>
+        <h1 class="static-title">Shell</h1>
+        <label class="theme-toggle">
+            <input type="checkbox" id="theme-toggle-checkbox">
+            <span class="slider"></span>
+        </label>
+        <button onclick="loadPage('/')">return</button>
+    </header>
+    <main>
+        <div class="shell-container">
+            <div class="shell-terminal" id="terminal">
+                <div id="output-container" class="shell-output"></div>
+            </div>
+
+            <div class="shell-input-bar">
+                <span class="prompt">$</span>
+                <input type="text" id="command-input" autofocus autocomplete="off"/>
+            </div> 
+        </div>        
+    </main>
+    
+    <script src="/static/JS/shell.js"></script>
+    <script src="/static/JS/elements/toggle-theme.js"></script>
+    <script src="/static/JS/SERVER_CONN/token-handler.js"></script>
+</body>
+</html>

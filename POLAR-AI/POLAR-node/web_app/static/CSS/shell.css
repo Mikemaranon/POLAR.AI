@@ -1,0 +1,62 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    padding: 20px;
+}
+
+.shell-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; 
+    margin-top: 60px;
+}
+
+.shell-terminal,
+.shell-input-bar {
+    font-family: Consolas, "Courier New", monospace;
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Contenido de salida */
+.shell-output {
+    min-height: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+}
+
+/* Barra de entrada */
+.shell-input-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.shell-input-bar .prompt {
+    font-weight: bold;
+    color: #333;
+}
+
+.shell-input-bar input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 14px;
+    outline: none;
+}

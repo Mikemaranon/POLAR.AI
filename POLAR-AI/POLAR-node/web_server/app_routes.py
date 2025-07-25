@@ -22,7 +22,7 @@ class AppRoutes:
         self.app.add_url_rule("/logout", "logout", self.get_logout, methods=["POST"])
 
         # userconfig routes
-        self.app.add_url_rule("/sites/shell", "shell", self.get_cli, methods=["POST"])
+        self.app.add_url_rule("/sites/shell", "shell", self.get_cli, methods=["GET"])
         self.app.add_url_rule("/sites/database", "database", self.get_database, methods=["GET"])
         self.app.add_url_rule("/sites/command-forge", "command_forge", self.get_command_forge, methods=["GET"])
 
@@ -86,8 +86,12 @@ class AppRoutes:
     # ================================================================================== 
 
     def get_cli(self):
-        # TODO: implement the CLI functionality
-        return jsonify({"message": "CLI functionality is not implemented yet."}), 501
+        # Check if the user is authenticated
+        user = self.user_manager.check_user(request)
+        if user:
+            return render_template("sites/shell.html")
+        
+        return render_template("login.html")
     
     def get_database(self):
         # Check if the user is authenticated
@@ -95,7 +99,7 @@ class AppRoutes:
         if user:
             return render_template("sites/database.html")
         
-        return jsonify({"error": "Unauthorized"}), 401
+        return render_template("login.html")
     
     def get_command_forge(self):
         # TODO: implement the command forge functionality

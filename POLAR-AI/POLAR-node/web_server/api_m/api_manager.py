@@ -1,16 +1,15 @@
-import jwt
-import zipfile
+
 from flask import request, jsonify
 from user_m.user_manager import UserManager
 from data_m.database import Database
-import os
-import json
+from cli_m.cli_manager import CliManager 
 
 class ApiManager:
-    def __init__(self, app, user_manager: UserManager, database: Database):
+    def __init__(self, app, user_manager: UserManager, database: Database, cli_manager: CliManager):
         self.app = app
         self.user_manager = user_manager
         self.database = database
+        self.cli_manager = cli_manager
         self._register_APIs()
     
     # =========================================================
@@ -21,6 +20,7 @@ class ApiManager:
         self.app.add_url_rule("/api/check", "check", self.API_check, methods=["GET"])
         self.app.add_url_rule("/api/db/tables", "get_tables", self.API_get_tables, methods=["GET"])
         self.app.add_url_rule("/api/db/table-content", "get_table_content", self.API_get_table_content, methods=["POST"])
+        self.app.add_url_rule("/api/shell/execute", "execute_shell_command", self.API_execute_shell_command, methods=["POST"])
     
     # =========================================
     #       API protocols start from here
@@ -51,3 +51,14 @@ class ApiManager:
         except Exception as e:
             return jsonify({"error": str(e)}), 500
     
+    def API_execute_shell_command(self):
+        data = request.get_json(silent=True)
+        if not data or 'command' not in data:
+            return jsonify({"error": "Command is required in JSON body"}), 400
+        
+        command = data['command']
+        try:
+            output = self.cli_manager.process_command(command, user_context={})
+            return jsonify({"output": output}), 200
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500

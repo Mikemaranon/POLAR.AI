@@ -6,6 +6,7 @@
     <title>Database</title>
 
     <link rel="stylesheet" href="/static/CSS/database.css">
+    <link rel="stylesheet" href="/static/CSS/general-responsive.css">
     <link rel="stylesheet" href="/static/CSS/elements/header.css">
     <link rel="stylesheet" href="/static/CSS/elements/modal.css">
     <link rel="stylesheet" href="/static/CSS/elements/search-bar.css">
@@ -32,7 +33,7 @@
 
 
     <div class="layout">
-        <aside class="db-sidebar">
+        <aside class="db-sidebar" id="db-sidebar">
             <h2>Tables</h2>
             <div class="search-bar">
                 <input type="text" id="search-input-tables" placeholder="search tables" />
@@ -48,6 +49,7 @@
                 <input type="text" id="search-input-columns" placeholder="search in table" />
                 <button id="search-button-columns"></button>
             </div>
+            
             <h2 id="table-title">No table selected yet</h2>
             <div class="db-table">
                 <table id="table-content">

@@ -218,6 +218,10 @@ tr.selected {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
+.search-bar input {
+    color: var(--gray-17);
+}
+
 .search-bar button:hover {
     background-color: var(--gray-9);
 }

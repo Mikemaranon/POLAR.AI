@@ -178,6 +178,15 @@ function copyJSONToClipboard(jsonObj) {
 }
 
 // ==============================
-//      SEARCH FUNCTIONALITY
+//        SIDEBAR BUTTON
 // ==============================
 
+function toggleSidebar() {
+    const sidebar = document.getElementById("db-sidebar");
+
+    if (sidebar.style.display === "none" || sidebar.style.display === "") {
+        sidebar.style.display = "block";
+    } else {
+        sidebar.style.display = "none";
+    }
+}

@@ -15,7 +15,7 @@
     height: auto;
     display: block;
     margin: 0 auto 20px;
-    margin-left: 5px;
+    margin-left: 15px;
     opacity: 0;
     animation: fadeIn 1s ease-out forwards;
 }

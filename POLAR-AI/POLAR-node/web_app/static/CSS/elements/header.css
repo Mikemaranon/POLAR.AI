@@ -100,11 +100,11 @@ header button {
         align-items: flex-start;
     }
 
-    header h1 {
-        display: none;
+    header button {
+        margin-top: 10px;
     }
 
     .title-wrapper {
-        display: none;
+        margin-top: 5px;
     }
 }

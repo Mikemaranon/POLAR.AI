@@ -85,20 +85,9 @@ main h1 {
         width: 180px;
         height: 100px;
     }
-
-    header h1 {
-        font-size: 1.2rem;
-    }
 }
 
 @media (max-width: 768px) {
-    header h1 {
-        font-size: 1rem;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
 
     .container div {
         width: 150px;
@@ -107,14 +96,6 @@ main h1 {
 }
 
 @media (max-width: 480px) {
-    header {
-        padding: 1rem;
-        align-items: flex-start;
-    }
-
-    header h1 {
-        display: none;
-    }
 
     .container {
         flex-direction: column;

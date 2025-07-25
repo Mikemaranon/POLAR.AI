@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,7 +19,7 @@
         <div class="title-wrapper">
             <div class="title-inner">
                 <h1>Database</h1>
-                <button class="none" onclick="loadPage('/')"><h1>return</h1></button>
+                <button class="none" onclick="openModal()"><h1>return</h1></button>
             </div>
         </div>
         <label class="theme-toggle">
@@ -35,7 +35,7 @@
             <h2>Tables</h2>
             <div class="search-bar">
                 <input type="text" id="search-input-tables" placeholder="search tables" />
-                <button id="search-button"></button>
+                <button id="search-button-tables"></button>
             </div>
             <ul id="table-list">
                 <!-- Table list will be populated here -->
@@ -44,8 +44,8 @@
 
         <main class="db-main-content">
             <div class="search-bar type-1">
-                <input type="text" id="search-input-collumns" placeholder="search in table" />
-                <button id="search-button"></button>
+                <input type="text" id="search-input-columns" placeholder="search in table" />
+                <button id="search-button-columns"></button>
             </div>
             <h2 id="table-title">No table selected yet</h2>
             <div class="db-table">
@@ -60,8 +60,24 @@
             </div>
         </main>
     </div>
+
+    <div id="fadeBackground" class="fade-background"></div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Return home?</h2>
+            <div id="options-container" class="inner-content">
+                <div class="opt-card" id="yes" onclick="loadPage('/')"><h3>Yes</h3></div>
+                <div class="opt-card" id="no" onclick="closeModal()"><h3>No</h3></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/JS/database.js"></script>
+    <script src="/static/JS/elements/toggle-theme.js"></script>
+    <script src="/static/JS/elements/modal.js"></script>
+    <script src="/static/JS/elements/search-bar.js"></script>
+    <script src="/static/JS/SERVER_CONN/token-handler.js"></script>
 </body>
-<script src="/static/JS/database.js"></script>
-<script src="/static/JS/elements/toggle-theme.js"></script>
-<script src="/static/JS/SERVER_CONN/token-handler.js"></script>
 </html>

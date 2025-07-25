@@ -44,7 +44,7 @@ class CliServer:
             self.print_log(conn, "[CLI_SERVER] Authentication failed for user: " + username)
             return None
 
-        user_data = self.db.get_user(username)
+        user_data = self.db.t_users.get_user(username)
         if not user_data or ROLE_TO_LEVEL.get(user_data.get("role")) != 4:
             self.send_msg(conn, "\n[FORBIDDEN ACCESS] Only level 4 (admin) users can access the CLI.\n")
             self.print_log(conn, "[CLI_SERVER] Unauthorized access attempt by user: " + username)

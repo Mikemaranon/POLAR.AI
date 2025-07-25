@@ -1,7 +1,8 @@
 
-let table_list;
-let table_content;
-let selectedRowData = null;
+var table_list;
+var headers
+var table_content;
+var selectedRowData = null;
 
 // ==============================
 //         ON LOAD EVENT
@@ -60,7 +61,7 @@ async function loadTableContent(tableName) {
     const response = await getData("POST", `/api/db/table-content`, { "table_name": tableName });
     if (response && response.content && Array.isArray(response.content.data)) {
         console.log(response.content.columns);
-        const headers = response.content.columns.map(col => col.name);
+        headers = response.content.columns.map(col => col.name);
         table_content = response.content.data;
         renderTableContent(tableName, response.content.data, headers);
     } else {

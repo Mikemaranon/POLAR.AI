@@ -70,6 +70,10 @@ body {
     overflow: auto; 
 }
 
+.json-container {
+    max-height: 60%;
+}
+
 .db-table table {
     width: 100%;
     border-collapse: collapse;

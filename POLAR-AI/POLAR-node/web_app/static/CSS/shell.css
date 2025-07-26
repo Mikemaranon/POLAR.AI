@@ -33,7 +33,7 @@ main {
 /* output */
 .shell-output {
     min-height: 300px;
-    max-height: 500px;
+    max-height: 600px;
     overflow-y: auto;
     white-space: pre-wrap;
 }

@@ -4,7 +4,7 @@ main {
 
 header {
     display: flex;
-    height: 90px;
+    max-height: 90px;
     justify-content: space-between; /* space between elements */
     align-items: center;
     position: fixed;
@@ -53,7 +53,6 @@ header button {
     overflow: hidden;
     display: flex;
     align-items: center;
-    top: 25px;
 }
 
 .title-inner {
@@ -100,10 +99,11 @@ header button {
         align-items: flex-start;
     }
 
-    header button {
-        margin-top: 10px;
+    .static-title {
+        margin-top: -5px;
     }
 
+    
     .title-wrapper {
         margin-top: 5px;
     }

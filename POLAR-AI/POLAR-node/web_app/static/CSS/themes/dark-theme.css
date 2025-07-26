@@ -225,3 +225,20 @@ tr.selected {
 .search-bar button:hover {
     background-color: var(--gray-9);
 }
+
+/* shell.css */
+
+.shell-terminal,
+.shell-input-bar {
+    background-color: var(--gray-2);
+}
+
+.shell-input-bar .prompt, 
+.shell-input-bar input {
+    color: var(--gray-17);
+}
+
+.shell-input-bar input {
+    border: 1px solid var(--gray-6);
+    background-color: var(--gray-6);
+}

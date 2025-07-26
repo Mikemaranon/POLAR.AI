@@ -189,3 +189,18 @@ tr.selected {
 .search-bar button:hover {
     background-color: var(--gray-9);
 }
+
+/* shell.css */
+
+.shell-terminal,
+.shell-input-bar {
+    background-color: var(--gray-1);
+}
+
+.shell-input-bar .prompt {
+    color: var(--gray-17);
+}
+
+.shell-input-bar input {
+    border: 1px solid var(--gray-12);
+}

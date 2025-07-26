@@ -3,12 +3,16 @@ const output = document.getElementById('output-container');
 const terminal = document.getElementById('terminal');
 
 const welcome_msg = [
-    "  _____   ____  _               _____                 _____  ",
-    " |  __ \ / __ \| |        /\   |  __ \          /\   |_   _| ",
-    " | |__) | |  | | |       /  \  | |__) |        /  \    | |   ",
-    " |  ___/| |  | | |      / /\ \ |  _  /        / /\ \   | |   ",
-    " | |    | |__| | |____ / ____ \| | \ \   _   / ____ \ _| |_  ",
-    " |_|     \____/|______/_/    \_\_|  \_\ (_) /_/    \_\_____| "
+ 
+    "  _____________________________________________________________",
+    " |        ___  ____  __   ___   ___        ___   ____          |",
+    " |       / _ \\/ __ \\/ /  / _ | / _ \\      / _ | /  _/          |",
+    " |      / ___/ /_/ / /__/ __ |/ , _/ _   / __ |_/ /            |",
+    " |     /_/   \\____/____/_/ |_/_/|_| (_) /_/ |_/___/            |",
+    " |                                                             |",
+    " |                                                             |",
+    " |      Welcome to POLAR Shell! Type your commands below       |",
+    " |_____________________________________________________________|\n"
 ]
 
 // wellcome message
@@ -21,6 +25,23 @@ function printWelcome() {
 function scrollToBottom() {
     output.scrollTop = output.scrollHeight;
 }
+
+// prints the message from the server
+function printMsg(data) {
+    try {
+        const parsed = JSON.parse(data);
+        const outputArray = parsed.output;
+
+        if (!Array.isArray(outputArray) || outputArray.length < 1) {
+            return "Invalid response.";
+        }
+
+        return outputArray[1] !== null ? outputArray[1] : outputArray[0];
+    } catch (err) {
+        return "Error processing response.";
+    }
+}
+
 
 // Enter
 input.addEventListener('keydown', async (e) => {
@@ -36,7 +57,7 @@ input.addEventListener('keydown', async (e) => {
             const res = await send_API_request('POST', "/api/shell/execute", { "command": command });
 
             const data = await res.text();
-            output.innerHTML += `${data.trim()}\n\n`;
+            output.innerHTML += `${printMsg(data)}\n\n`;
         } catch (err) {
             output.innerHTML += `Error running command.\n\n`;
         }
@@ -51,5 +72,5 @@ document.addEventListener('click', () => {
 });
 
 // Initialize the terminal
-// printWelcome();
+printWelcome();
 input.focus();

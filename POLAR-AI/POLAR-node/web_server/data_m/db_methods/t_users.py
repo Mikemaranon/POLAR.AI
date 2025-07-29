@@ -62,7 +62,6 @@ class UsersTable:
         return None
 
     def update_user(self, username: str, new_name: str = None, new_password: str = None, new_role: int = None):
-        # TODO: finish the method
         try:
             user_data = self.get_user(username)
             if not user_data:
@@ -119,3 +118,31 @@ class UsersTable:
         except Exception as e:
             print(f"[DELETE ERROR] failed to delete user '{username}': {e}")
             return False
+        
+    def get_users_by_role(self, role: str):
+        query = "SELECT username, role, created_at FROM users WHERE role = %s;"
+        try:
+            self.execute(query, (role,))
+            users = self.fetchall()
+            if users:
+                return [{"username": user[0], "role": user[1], "created_at": user[2]} for user in users]
+            else:
+                print(f"[QUERY WARNING] No users found with role '{role}'.")
+                return []
+        except Exception as e:
+            print(f"[SELECT ERROR] fetching users by role '{role}' failed: {e}")
+            return []
+        
+    def get_all_users(self):
+        query = "SELECT username, role, created_at FROM users;"
+        try:
+            self.execute(query)
+            users = self.fetchall()
+            if users:
+                return [{"username": user[0], "role": user[1], "created_at": user[2]} for user in users]
+            else:
+                print("[QUERY WARNING] No users found.")
+                return []
+        except Exception as e:
+            print(f"[SELECT ERROR] fetching all users failed: {e}")
+            return []

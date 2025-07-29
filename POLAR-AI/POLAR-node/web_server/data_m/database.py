@@ -13,21 +13,22 @@ PORT = 5555
 ENCODING = 'utf-8'
 BUFFER_SIZE = 1024
 
-ROLE_TO_LEVEL = {
-    'user': 1,
-    'trainer': 2,
-    'developer': 3,
-    'admin': 4
-}
-
-LEVEL_TO_ROLE = {
-    1: 'user',
-    2: 'trainer',
-    3: 'developer',
-    4: 'admin'
-}
-
 class Database:
+
+    ROLE_TO_LEVEL = {
+        'user': 1,
+        'trainer': 2,
+        'developer': 3,
+        'admin': 4
+    }
+
+    LEVEL_TO_ROLE = {
+        1: 'user',
+        2: 'trainer',
+        3: 'developer',
+        4: 'admin'
+    }
+
 
     _instance = None
     _lock = threading.Lock()
@@ -50,21 +51,21 @@ class Database:
         self.t_users = UsersTable(
             self.connector, self.close,
             self.execute, self.fetchone, self.fetchall,
-            LEVEL_TO_ROLE, ROLE_TO_LEVEL,
+            self.LEVEL_TO_ROLE, self.ROLE_TO_LEVEL,
         )
 
         # Initialize the database manager for sessions
         self.t_sessions = SessionsTable(
             self.connector, self.close,
             self.execute, self.fetchone, self.fetchall,
-            LEVEL_TO_ROLE, ROLE_TO_LEVEL,
+            self.LEVEL_TO_ROLE, self.ROLE_TO_LEVEL,
         )
 
         # Initialize the database manager for commands
         self.t_commands = CommandsTable(
             self.connector, self.close,
             self.execute, self.fetchone, self.fetchall,
-            LEVEL_TO_ROLE, ROLE_TO_LEVEL,
+            self.LEVEL_TO_ROLE, self.ROLE_TO_LEVEL,
         )
 
         try:

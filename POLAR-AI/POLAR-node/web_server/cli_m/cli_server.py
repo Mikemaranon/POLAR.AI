@@ -5,7 +5,7 @@ import threading
 from data_m.database import HOST, PORT, ENCODING, BUFFER_SIZE
 from user_m.user_manager import UserManager
 from cli_m.cli_manager import CliManager
-from data_m.database import Database, LEVEL_TO_ROLE, ROLE_TO_LEVEL
+from data_m.database import Database
 
 class CliServer:
     def __init__(self):
@@ -45,11 +45,11 @@ class CliServer:
             return None
 
         user_data = self.db.t_users.get_user(username)
-        if not user_data or ROLE_TO_LEVEL.get(user_data.get("role")) != 4:
+        if not user_data or self.db.ROLE_TO_LEVEL.get(user_data.get("role")) != 4:
             self.send_msg(conn, "\n[FORBIDDEN ACCESS] Only level 4 (admin) users can access the CLI.\n")
             self.print_log(conn, "[CLI_SERVER] Unauthorized access attempt by user: " + username)
-            self.send_msg(conn, "must: " + LEVEL_TO_ROLE.get(4) + " - 4")
-            self.send_msg(conn, "\n your role: " + str(user_data.get("role", "unknown")) + " - " + ROLE_TO_LEVEL.get(user_data.get("role")))
+            self.send_msg(conn, "must: " + self.db.LEVEL_TO_ROLE.get(4) + " - 4")
+            self.send_msg(conn, "\n your role: " + str(user_data.get("role", "unknown")) + " - " + self.db.ROLE_TO_LEVEL.get(user_data.get("role")))
             return None
 
         self.send_msg(conn, "\n[CLI_SERVER] Welcome, admin.")

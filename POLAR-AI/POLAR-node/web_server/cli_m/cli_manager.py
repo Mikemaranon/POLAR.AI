@@ -59,26 +59,51 @@ class CliManager:
 
         sub_meta = subcommands[subcommand]
         args_spec = sub_meta.get("args", {})
-        if not args_spec:
-            return sub_meta, {}, None  # no expected args, return empty dict
 
-        # parse args like a shell command
-        parsed_args, error = CliManager.parse_named_args(args_list)
+        if not args_spec:
+            if args_list:
+                return None, None, f"This subcommand does not accept arguments, but got: {args_list}"
+            return sub_meta, {}, None
+
+        # Parse args
+        parsed_args, error = self.parse_named_args(args_list)
         if error:
             return None, None, error
 
-        # validate required arguments
+        # Validate unknown args
+        invalid_args = [arg for arg in parsed_args if arg not in args_spec]
+        if invalid_args:
+            print(f"[ERROR - CLI_MANAGER] Invalid arguments: {', '.join(invalid_args)}")
+            return None, None, f"Invalid arguments: {invalid_args}"
+
+        # Validate missing required args
         missing = [
             flag for flag, requirement in args_spec.items()
             if requirement == "required" and flag not in parsed_args
         ]
         if missing:
             print(f"[ERROR - CLI_MANAGER] Missing required arguments: {', '.join(missing)}")
-            return None, None, f"missing arguments are required : {missing}"
+            return None, None, f"Missing required arguments: {missing}"
 
-        # return valid args
-        kwargs = {k: v for k, v in parsed_args.items() if k in args_spec}
-        return sub_meta, kwargs, None
+        return sub_meta, parsed_args, None  # return args as a dictionary
+
+    def parse_named_args(self, args_list: list):
+        parsed = {}
+        i = 0
+        while i < len(args_list):
+            arg = args_list[i]
+            if arg.startswith("-") and len(arg) > 1:
+                key = arg[1:]
+                if i + 1 < len(args_list) and not args_list[i + 1].startswith("-"):
+                    parsed[key] = args_list[i + 1]
+                    i += 2
+                else:
+                    parsed[key] = True # flag without value
+                    i += 1
+            else:
+                print(f"[WARNING - CLI_MANAGER] Ignored unrecognized argument: {arg}")
+                i += 1
+        return parsed, None
     
     def import_command_module(self, module_name: str, command_id: str):
         try:
@@ -106,7 +131,7 @@ class CliManager:
 
     def execute_command_function(self, func, user_context: dict, kwargs: dict, function_name: str):
         try:
-            return func(user_context, **kwargs)
+            return func(arg=kwargs, user_context=user_context)
         except Exception as e:
             print(f"[ERROR - CLI_MANAGER] Error running '{function_name}': {e}")
             return f"Error running '{function_name}': {e}"

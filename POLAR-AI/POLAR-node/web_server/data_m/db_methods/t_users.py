@@ -37,7 +37,7 @@ class UsersTable:
                     "username": user_data[0],
                     "password": user_data[1],
                     "role": user_data[2],
-                    "creation": user_data[3]
+                    "created_at": user_data[3]
                 }
         except Exception as e:
             print(f"[SELECT ERROR] fetching user failed: {e}")
@@ -47,9 +47,9 @@ class UsersTable:
 
         password_hash = generate_password_hash(password)
         
-        role_string = self.LEVEL_TO_ROLE.get(role_level)
+        role_string = self.LEVEL_TO_ROLE.get(int(role_level))
         if not role_string:
-            print(f"[ROLE ERROR] role level  '{role_level}' not valid. operation aborted.")
+            print(f"[ROLE ERROR] role level '{role_level}' not valid. operation aborted.")
             return None
 
         query = "INSERT INTO users (username, password, role) VALUES (%s, %s, %s);"
@@ -61,7 +61,7 @@ class UsersTable:
             print(f"[INSERT ERROR] saving user '{username}' failed: {e}")
         return None
 
-    def update_user(self, username: str, new_name: str = None, new_password: str = None, new_role: int = None):
+    def db_update_user(self, username: str, new_name: str = None, new_password: str = None, new_role: int = None):
         try:
             user_data = self.get_user(username)
             if not user_data:
@@ -80,10 +80,16 @@ class UsersTable:
                 updates.append("password = %s")
                 params.append(password_hash)
 
-            if new_role is not None:
+            if new_role:
+                try:
+                    new_role = int(new_role)
+                except ValueError:
+                    print(f"[ROLE ERROR] role level '{new_role}' not valid. Must be an integer.")
+                    return False
+
                 role_string = self.LEVEL_TO_ROLE.get(new_role)
                 if not role_string:
-                    print(f"[ROLE ERROR] role level '{new_role}' not valid. operation aborted.")
+                    print(f"[ROLE ERROR] role level '{new_role}' not valid. Operation aborted.")
                     return False
                 updates.append("role = %s")
                 params.append(role_string)
@@ -100,7 +106,7 @@ class UsersTable:
             return True
         except Exception as e:
             print(f"[UPDATE ERROR] failed to update user '{username}': {e}")
-        return None
+            return None
 
     def delete_user(self, username: str):
         user_data = self.get_user(username)

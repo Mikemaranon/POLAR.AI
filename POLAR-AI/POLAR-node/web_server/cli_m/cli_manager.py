@@ -95,7 +95,7 @@ class CliManager:
             if arg.startswith("-") and len(arg) > 1:
                 key = arg[1:]
                 if i + 1 < len(args_list) and not args_list[i + 1].startswith("-"):
-                    parsed[key] = args_list[i + 1]
+                    parsed[key] = str(args_list[i + 1])
                     i += 2
                 else:
                     parsed[key] = True # flag without value

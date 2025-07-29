@@ -1,7 +1,7 @@
 # web_server/cli_m/commands/system_commands/user.py
 
 from data_m.database import Database
-from cli_m.commands.arg_parser import extract_arguments
+from cli_m.commands.general_func import extract_arguments, normalize_role
 db = Database()
 
 def list_users(arg=None, user_context=None):
@@ -10,6 +10,7 @@ def list_users(arg=None, user_context=None):
     role = extract_arguments(arg, "r") if arg else None
 
     if role:
+        role = normalize_role(role)
         output.append(f"Listing users with role: {role}")
         users = db.t_users.get_users_by_role(role)
         if not users:
@@ -52,7 +53,6 @@ def print_info(user_context=None, arg=None):
     output = [
         f"User Information for '{username}':",
         "-" * 63,
-        f"{'ID:'.ljust(15)} {user['id']}",
         f"{'Username:'.ljust(15)} {user['username']}",
         f"{'Role:'.ljust(15)} {user['role']}",
         f"{'Created At:'.ljust(15)} {user['created_at']}",
@@ -66,11 +66,16 @@ def add_user(user_context=None, arg=None):
     password = extract_arguments(arg, "p")
     role = extract_arguments(arg, "r") or 1  # Default to role
 
+    try:
+        role = int(role)
+    except ValueError:
+        return f"Invalid role '{role}'. Must be an integer."
+
     if db.t_users.get_user(username):
         return f"User '{username}' already exists."
 
-    if role not in db.ROLE_TO_LEVEL:
-        return f"Invalid role '{role}'. Valid roles are: {', '.join(db.LEVEL_TO_ROLE.keys())}."
+    if role not in db.LEVEL_TO_ROLE:
+        return f"Invalid role '{role}'. Valid roles are: {', '.join(str(k) for k in db.LEVEL_TO_ROLE.keys())}."
 
     success = db.t_users.add_user(username, password, role)
     if success:
@@ -83,12 +88,19 @@ def update_user(user_context=None, arg=None):
     username = extract_arguments(arg, "username")
     new_name = extract_arguments(arg, "n") or None
     new_password = extract_arguments(arg, "p") or None
-    new_role = extract_arguments(arg, "r") or None
+    new_role_str = extract_arguments(arg, "r") or None
+
+    new_role = None
+    if new_role_str:
+        try:
+            new_role = int(new_role_str)
+        except ValueError:
+            return f"Invalid role value '{new_role_str}', must be an integer."
 
     if not db.t_users.get_user(username):
         return f"User '{username}' not found."
 
-    success = db.t_users.update_user(username, new_name, new_password, new_role)
+    success = db.t_users.db_update_user(username, new_name, new_password, new_role)
     if success:
         return f"User '{username}' updated successfully."
     else:

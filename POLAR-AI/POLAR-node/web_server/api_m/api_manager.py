@@ -3,6 +3,7 @@ from flask import request, jsonify
 from user_m.user_manager import UserManager
 from data_m.database import Database
 from cli_m.cli_manager import CliManager 
+from POLAR_m.POLAR_manager import POLARmanager
 
 class ApiManager:
     def __init__(self, app, user_manager: UserManager, database: Database, cli_manager: CliManager):
@@ -10,7 +11,9 @@ class ApiManager:
         self.user_manager = user_manager
         self.database = database
         self.cli_manager = cli_manager
+        self.POLAR_manager = POLARmanager(self.app, self.user_manager, self.database, self.cli_manager)
         self._register_APIs()
+        self.POLAR_manager.register_POLAR_api()
     
     # =========================================================
     #                     REGISTERING APIs

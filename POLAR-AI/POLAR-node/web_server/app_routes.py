@@ -22,7 +22,6 @@ class AppRoutes:
         self.app.add_url_rule("/login", "login", self.get_login, methods=["GET", "POST"])
         self.app.add_url_rule("/logout", "logout", self.get_logout, methods=["POST"])
 
-        # userconfig routes
         self.app.add_url_rule("/sites/shell", "shell", self.get_cli, methods=["GET"])
         self.app.add_url_rule("/sites/database", "database", self.get_database, methods=["GET"])
         self.app.add_url_rule("/sites/command-forge", "command_forge", self.get_command_forge, methods=["GET"])

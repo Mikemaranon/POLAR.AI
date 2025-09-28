@@ -8,17 +8,15 @@
 
 - [Introduction](#introduction)
 - [1. POLAR Node: Central Management Hub](#1-polar-node-central-management-hub)
-  - [1.1 API Module (`api_m`)](#11-api-module-api_m)
-    - [1.1.1 Endpoints Overview](#111-endpoints-overview)
-    - [1.1.2 Structure Overview](#112-structure-overview)
-      - [Shared Components](#shared-components)
-        - [POLAR Manager](#polar-manager)
-        - [Database: PostgreSQL](#database-postgresql)
-        - [Entities](#entities)
-        - [Repositories](#repositories)
-        - [Services](#services)
-  - [1.2 Authentication and Roles](#12-authentication-and-roles)
-  - [1.3 Web Interface](#13-web-interface)
+    - [1.1 `main.py`](#11-mainpy)
+    - [1.2 `flask_server.py`](#12-flask_serverpy)
+        - [The `Server` class: Initialization](#the-server-class-initialization)
+        - [The `Server` class: modules instances](#the-server-class-modules-instances)
+    - [1.3 `app_routes.py`](#13-app_routespy)
+    - [1.4 `data_m` module: the database of POLAR ecosystem](#14-data_m-module-the-database-of-polar-ecosystem)
+    - [1.5 `user_m` module: management of POLAR users](#15-user_m-module-management-of-polar-users)
+    - [1.6 `api_m` module: endpoints and use cases](#16-api_m-module-endpoints-and-use-cases)
+    - [1.7 `cli_m` module: the POLAR node terminal](#17-cli_m-module-the-polar-node-terminal)
 - [2. POLAR Core: Model Deployment & Management](#2-polar-core-model-deployment--management)
 - [3. POLAR Forge: Model Creation and Training](#3-polar-forge-model-creation-and-training)
 - [4. POLAR Studio: User Interaction Layer](#4-polar-studio-user-interaction-layer)
@@ -189,7 +187,40 @@ each module has some very specific roles in this server:
 
 ## 1.3 `app_routes.py`
 
+This file is composed of a main class named `AppRoutes` which defines every endpoint in the web interface. There is a main process between every endpoint: it checks the autentication of the user for every request, returning the defined page if the auth is accepted or returning the `login.html` page instead.
 
+The `__init__` method of this class registers the `UserManager` and `Database` in local variables for better access, it also calls the endpoint registering method:
+```python
+def __init__(self, app, user_manager: UserManager, database: Database):
+    self.app = app
+    self.user_manager = user_manager
+    self.database = database
+    self._register_routes()
+```
+The next method is as important as the `__init__` one. `_register_routes()` calls every defined method in this class to take the flask `add_url_rule()` method and register them as endpoints:
+
+```python
+def _register_routes(self):
+    self.app.add_url_rule("/", "home", self.get_home, methods=["GET"])
+    self.app.add_url_rule("/login", "login", self.get_login, methods=["GET", "POST"])
+    self.app.add_url_rule("/logout", "logout", self.get_logout, methods=["POST"])
+
+def get_home(self):
+    user = self.user_manager.check_user(request)
+    if user:            
+        return render_template("index.html", user=user)  # Redirect to index.html
+    return render_template("login.html")
+```
+here we have a list of the current methods and theis respective endpoints:
+
+| Endpoint             | Method                 | Description                                                                                       |
+|----------------------|------------------------|---------------------------------------------------------------------------------------------------|
+| /                    | `get_home()`           | Home page endpoint. Returns index.html if authenticated, login.html otherwise                     |
+| /login               | `get_login()`          | Authentication endpoint. GET returns the login form, POST processes login credentials             |
+| /logout              | `get_logout()`         | Ends the current user session and redirects to login page                                         |
+| /sites/shell         | `get_cli()`            | Opens the POLAR node terminal interface for command-line interactions via the web                 |
+| /sites/database      | `get_database()`       | Provides access to the database management dashboard, allowing inspection and basic operations    |
+| /sites/command-forge | `get_command_forge()`  | Launches the Command Forge interface for creating and managing custom commands in the ecosystem   |
 
 <div class="page-break"></div>
 

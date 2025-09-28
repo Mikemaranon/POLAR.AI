@@ -16,3 +16,7 @@ The ecosystem has 3 main software components:
 
 This project aims to be completely free and open-source. It is not a commercial venture offering services. The POLAR.AI ecosystem is being developed to be released and published, allowing any user or company to use it at no cost.  
 POLAR is being designed to be compatible with both cloud and on-premise architectures, making it adaptable to any environment through Docker or kubernetes deployment. 
+
+## Documentation
+
+Project documentation can be found [here](/DOC/documentation/POLAR%20doc.pdf)

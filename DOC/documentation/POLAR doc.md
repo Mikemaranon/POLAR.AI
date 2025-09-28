@@ -14,6 +14,10 @@
         - [The `Server` class: modules instances](#the-server-class-modules-instances)
     - [1.3 `app_routes.py`](#13-app_routespy)
     - [1.4 `data_m` module: the database of POLAR ecosystem](#14-data_m-module-the-database-of-polar-ecosystem)
+        - [`database.py`: Central query system of POLAR node](#databasepy-central-query-system-of-polar-node)
+        - [`db_methods/t_users.py`: table and query definitions for the users table](#db_methodst_userspy-table-and-query-deffinitions-for-the-users-table)
+        - [`db_methods/t_sessions.py`: table and query definitions for the sessions table](#db_methodst_sessionspy-table-and-query-deffinitions-for-the-sessions-table)
+        - [`db_methods/t_commands.py`: table and query definitions for the commands table](#db_methodst_commandspy-table-and-query-deffinitions-for-the-commands-table)       
     - [1.5 `user_m` module: management of POLAR users](#15-user_m-module-management-of-polar-users)
     - [1.6 `api_m` module: endpoints and use cases](#16-api_m-module-endpoints-and-use-cases)
     - [1.7 `cli_m` module: the POLAR node terminal](#17-cli_m-module-the-polar-node-terminal)
@@ -226,7 +230,31 @@ here we have a list of the current methods and theis respective endpoints:
 
 ## 1.4 `data_m` module: the database of POLAR ecosystem
 
+The `data_m` module serves as the core data management layer for the POLAR ecosystem. It is responsible for all database operations, including the creation, retrieval, updating, and deletion of records related to users, sessions, roles, and other entities essential to the functioning of the POLAR node.
 
+The design of the database implementation through the server gives it several responsibilities:
+- **Database Initialization:** Sets up the required tables and ensures the schema is up-to-date on startup.
+- **Session Management:** Handles user sessions, including creation, validation, and cleanup, to maintain secure and consistent authentication flows.
+- **User and Role Storage:** Stores user credentials, roles, and permissions, supporting robust access control mechanisms.
+- **Data Abstraction:** Provides a clean API for other modules (such as `user_m` and `api_m`) to interact with persistent data without exposing low-level database logic.
+- **Extensibility:** Designed to allow easy addition of new tables or data entities as the ecosystem grows.
+
+The module includes in geenral aspects:
+
+- **`database.py`**: Central entry point for all database operations.
+- **`db_connector.py`**: Class that connects the server to the database.
+- **Table abstractions**: Classes or methods for managing specific tables (e.g., `t_users`, `t_sessions`, `t_commands`).
+- **Utility functions**: Helpers for migrations, data validation, and connection management.
+
+By centralizing all data-related logic, the `data_m` module ensures that the POLAR node remains maintainable, secure, and scalable as new features and modules are integrated.
+
+### `database.py`: Central query system of POLAR node
+
+### `db_methods/t_users.py`: table and query deffinitions for the users table
+
+### `db_methods/t_sessions.py`: table and query deffinitions for the sessions table
+
+### `db_methods/t_commands.py`: table and query deffinitions for the commands table
 
 <div class="page-break"></div>
 

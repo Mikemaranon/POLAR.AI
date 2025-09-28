@@ -1,3 +1,5 @@
+# POLAR-AI/POLAR-node/web_server/flask-server.py
+
 import threading, os
 from flask import Flask
 from data_m.database import Database
@@ -17,10 +19,10 @@ class Server:
         self.app_routes = self.ini_app_routes()
         self.api_manager = self.ini_api_manager()
 
-        # Configuración del puerto (para Render o local)
+        # Port configuration
         port = int(os.environ.get('PORT', 5000))
 
-        # Detectar si estamos en el hilo principal
+        # Detect if running in main thread
         is_main_thread = threading.current_thread() is threading.main_thread()
         if not is_main_thread:
             print("⚠️ Flask running in a secondary thread: disabling debug and reloader.")
